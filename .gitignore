@@ -1,0 +1,360 @@
+# ================================
+# AI Trend Notifier - .gitignore
+# ================================
+
+# ==================
+# Environment & Secrets
+# ==================
+.env
+.env.local
+.env.*.local
+*.env
+**/.env
+
+# API Keys & Credentials
+secrets/
+credentials/
+*.key
+*.pem
+*.p12
+
+# ==================
+# Python
+# ==================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ==================
+# Database Files
+# ==================
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+data/db/*.db
+data/db/*.sqlite
+data/db/*.sqlite3
+
+# Database backups
+*.db.backup
+*.sql.backup
+backup/
+
+# Keep schema files but ignore data
+!data/db/schema.sql
+
+# ==================
+# Logs & Temporary Files
+# ==================
+
+# Log files
+*.log
+logs/
+*.log.*
+log/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==================
+# IDE & Editors
+# ==================
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ==================
+# OS Specific
+# ==================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ==================
+# Project Specific
+# ==================
+
+# Downloaded models (HuggingFace cache)
+transformers_cache/
+.cache/
+models/
+*.bin
+*.safetensors
+
+# Airflow
+airflow.db
+airflow-webserver.pid
+airflow.cfg
+logs/
+dags/__pycache__/
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# Data files (except schemas)
+data/*.csv
+data/*.json
+data/*.txt
+data/raw/
+data/processed/
+data/cache/
+
+# Keep important data structure files
+!data/db/schema.sql
+!data/.gitkeep
+
+# Email templates with sensitive info
+templates/email/*.html
+templates/email/*.txt
+
+# Batch/Shell scripts with credentials
+run_with_secrets.bat
+run_with_secrets.sh
+
+# ==================
+# Docker
+# ==================
+docker-compose.override.yml
+.dockerignore
+
+# ==================
+# Testing
+# ==================
+.pytest_cache/
+.coverage
+htmlcov/
+test-results/
+*.pytest_cache
+
+# ==================
+# Documentation
+# ==================
+docs/_build/
+site/
+
+# ==================
+# Backup Files
+# ==================
+*.bak
+*.backup
+*.old
+*_backup.*
+
+# ==================
+# Package Managers
+# ==================
+node_modules/
+package-lock.json
+yarn.lock
+
+# ==================
+# Miscellaneous
+# ==================
+
+# API response cache
+api_cache/
+*.cache
+
+# Screenshots/recordings (optional)
+screenshots/
+recordings/
+
+# Large datasets
+*.parquet
+*.feather
+*.h5
+*.hdf5
+
+# Jupyter notebooks output
+*.ipynb_checkpoints
+
+# Keep empty directories with .gitkeep
+!**/.gitkeep

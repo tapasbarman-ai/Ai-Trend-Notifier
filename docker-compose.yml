@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  streamlit:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./.env:/app/.env
+    command: streamlit run web/app.py
+
+  airflow:
+    image: apache/airflow:2.9.0
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./src/orchestrator:/opt/airflow/dags
+      - ./data:/app/data
+      - ./.env:/app/.env
+    ports:
+      - "8080:8080"
+    command: airflow standalone

@@ -1,0 +1,43 @@
+<html>
+  <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffffff;">
+
+    <!-- HEADER -->
+    <div style="text-align: center; padding: 25px 20px;">
+      <h1 style="color: #4A90E2; margin-bottom: 10px;">📢 {{title}} 🚀</h1>
+    </div>
+
+    <!-- GIF BANNER -->
+    <div style="text-align: center; margin-bottom: 25px;">
+      <img src="{{gif_url}}" alt="AI Trend Banner" style="width: 90%; max-width: 600px; border-radius: 10px;">
+    </div>
+
+    <!-- INTRO -->
+    <div style="padding: 0 25px; font-size: 15px; line-height: 1.6;">
+      <p>{{intro_text}}</p>
+    </div>
+
+    <!-- TRENDS LOOP -->
+    {% for trend in trends %}
+    <div style="padding: 0 25px; margin-top: 20px;">
+      <h2 style="color: #4A90E2; font-size: 20px;">{{loop.index}}. {{trend.title}} {{trend.emoji}}</h2>
+
+      <p>{{trend.summary}}</p>
+
+      <p style="font-weight: bold; margin-top: 10px;">
+        Sentiment:
+        <span style="color: {{trend.sentiment_color}};">{{trend.sentiment_emoji}} {{trend.sentiment}}</span>
+      </p>
+    </div>
+    {% endfor %}
+
+    <!-- DIVIDER -->
+    <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 40px 0;">
+
+    <!-- FOOTER -->
+    <div style="text-align: center; padding: 20px; font-size: 13px; background-color: #f2f2f2; color: #555;">
+      Sent automatically by your AI Trend Analyzer 💌<br>
+      <span style="font-size: 11px;">GIF updates daily based on date.</span>
+    </div>
+
+  </body>
+</html>
