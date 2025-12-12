@@ -170,6 +170,59 @@ Executive Summary:"""
             print(f"⚠️  Executive summary error: {e}")
             return "Unable to generate executive summary at this time."
 
+    def generate_headline(self, summary: str) -> str:
+        """
+        Generate a catchy, concise headline from a trend summary
+        
+        Args:
+            summary: The trend summary text
+            
+        Returns:
+            A short, engaging headline (max 80 characters)
+        """
+        try:
+            prompt = f"""You are a professional headline writer. Create a catchy, concise headline for this AI trend.
+
+Trend Summary:
+{summary}
+
+Requirements:
+- Maximum 80 characters
+- Clear and engaging
+- Professional tone
+- No clickbait
+- Focus on the key insight
+- No quotes or special formatting
+
+Headline:"""
+
+            response = self.llm.invoke(prompt)
+            headline = response.content.strip()
+            
+            # Clean up
+            headline = headline.replace('"', '').replace("'", "").strip()
+            
+            # Truncate if too long
+            if len(headline) > 80:
+                headline = headline[:77] + "..."
+                
+            return headline
+            
+        except Exception as e:
+            print(f"⚠️  Headline generation error: {e}")
+            # Fallback: use first sentence of summary
+            return self._extract_title_fallback(summary)
+    
+    def _extract_title_fallback(self, summary: str) -> str:
+        """Fallback title extraction from summary"""
+        sentences = summary.split('.')
+        if sentences and len(sentences[0]) > 10:
+            title = sentences[0].strip()
+            if len(title) > 80:
+                title = title[:77] + "..."
+            return title
+        return "AI Trend Update"
+
     def _clean_summary(self, summary: str) -> str:
         """Clean up common summary issues"""
         # Remove common prefixes

@@ -53,15 +53,17 @@ class TwitterAgent:
         self.bearer_token = TWITTER_BEARER_TOKEN
         self.base_url = "https://api.twitter.com/2/tweets/search/recent"
 
-    def fetch_trends(self, max_results=50):
+    def fetch_trends(self, max_results=30, min_likes=10, min_retweets=5):
         """
-        Fetch recent AI-related tweets
+        Fetch recent AI-related tweets with quality filtering
 
         Args:
-            max_results: Number of tweets to fetch (10-100, default 50)
+            max_results: Number of tweets to fetch (10-100, default 30)
+            min_likes: Minimum like count (default 10)
+            min_retweets: Minimum retweet count (default 5)
 
         Returns:
-            List of trend dictionaries
+            List of trend dictionaries sorted by engagement
         """
         if not self.bearer_token:
             print("⚠️  Twitter Bearer Token not configured")
@@ -95,13 +97,13 @@ class TwitterAgent:
 
             params = {
                 "query": query,
-                "max_results": min(max_results, 100),  # API max is 100
+                "max_results": min(max_results * 3, 100),  # Fetch more to filter
                 "tweet.fields": "created_at,public_metrics,author_id",
                 "expansions": "author_id",
                 "user.fields": "username,name"
             }
 
-            print(f"🐦 Fetching {max_results} tweets from Twitter...")
+            print(f"🐦 Fetching tweets from Twitter...")
             response = requests.get(self.base_url, headers=headers, params=params)
 
             if response.status_code == 429:
@@ -125,6 +127,17 @@ class TwitterAgent:
 
             trends = []
             for tweet in tweets:
+                metrics = tweet.get("public_metrics", {})
+                likes = metrics.get("like_count", 0)
+                retweets = metrics.get("retweet_count", 0)
+                
+                # Filter by engagement
+                if likes < min_likes or retweets < min_retweets:
+                    continue
+                
+                # Calculate engagement score
+                engagement_score = likes + (retweets * 2)  # Retweets weighted 2x
+                
                 author = users.get(tweet.get("author_id"), {})
 
                 trends.append({
@@ -133,12 +146,20 @@ class TwitterAgent:
                     "author": author.get("username", "unknown"),
                     "author_name": author.get("name", "Unknown"),
                     "created_at": tweet.get("created_at", ""),
-                    "metrics": tweet.get("public_metrics", {}),
-                    "tweet_id": tweet.get("id", "")
+                    "metrics": metrics,
+                    "tweet_id": tweet.get("id", ""),
+                    "engagement_score": engagement_score,
+                    "quality_score": engagement_score / 10  # Normalize for comparison
                 })
+            
+            # Sort by engagement (highest first)
+            trends.sort(key=lambda x: x['engagement_score'], reverse=True)
+            
+            # Return top results
+            top_trends = trends[:max_results]
 
-            print(f"✅ Fetched {len(trends)} tweets from Twitter")
-            return trends
+            print(f"✅ Fetched {len(top_trends)} high-engagement tweets (from {len(trends)} filtered)")
+            return top_trends
 
         except requests.exceptions.RequestException as e:
             print(f"❌ Twitter request error: {e}")
@@ -195,8 +216,8 @@ class TwitterAgentConfigurable(TwitterAgent):
 
         print(f"📝 Using '{query_type}' query preset ({len(self.query)} chars)")
 
-    def fetch_trends(self, max_results=50):
-        """Fetch trends using preset query"""
+    def fetch_trends(self, max_results=30, min_likes=10, min_retweets=5):
+        """Fetch trends using preset query with quality filtering"""
         if not self.bearer_token:
             print("⚠️  Twitter Bearer Token not configured")
             return []
@@ -209,13 +230,13 @@ class TwitterAgentConfigurable(TwitterAgent):
 
             params = {
                 "query": self.query,
-                "max_results": min(max_results, 100),
+                "max_results": min(max_results * 3, 100),  # Fetch more to filter
                 "tweet.fields": "created_at,public_metrics,author_id",
                 "expansions": "author_id",
                 "user.fields": "username,name"
             }
 
-            print(f"🐦 Fetching {max_results} tweets from Twitter...")
+            print(f"🐦 Fetching tweets from Twitter...")
             response = requests.get(self.base_url, headers=headers, params=params)
 
             if response.status_code == 429:
@@ -238,6 +259,17 @@ class TwitterAgentConfigurable(TwitterAgent):
 
             trends = []
             for tweet in tweets:
+                metrics = tweet.get("public_metrics", {})
+                likes = metrics.get("like_count", 0)
+                retweets = metrics.get("retweet_count", 0)
+                
+                # Filter by engagement
+                if likes < min_likes or retweets < min_retweets:
+                    continue
+                
+                # Calculate engagement score
+                engagement_score = likes + (retweets * 2)
+                
                 author = users.get(tweet.get("author_id"), {})
 
                 trends.append({
@@ -246,12 +278,18 @@ class TwitterAgentConfigurable(TwitterAgent):
                     "author": author.get("username", "unknown"),
                     "author_name": author.get("name", "Unknown"),
                     "created_at": tweet.get("created_at", ""),
-                    "metrics": tweet.get("public_metrics", {}),
-                    "tweet_id": tweet.get("id", "")
+                    "metrics": metrics,
+                    "tweet_id": tweet.get("id", ""),
+                    "engagement_score": engagement_score,
+                    "quality_score": engagement_score / 10
                 })
+            
+            # Sort by engagement
+            trends.sort(key=lambda x: x['engagement_score'], reverse=True)
+            top_trends = trends[:max_results]
 
-            print(f"✅ Fetched {len(trends)} tweets from Twitter")
-            return trends
+            print(f"✅ Fetched {len(top_trends)} high-engagement tweets (from {len(trends)} filtered)")
+            return top_trends
 
         except requests.exceptions.RequestException as e:
             print(f"❌ Twitter request error: {e}")

@@ -85,18 +85,78 @@ class EmailAgent:
         # Better validation
         if not self.email_address or not self.email_password:
             raise ValueError("⚠️ ERROR: SMTP_EMAIL or SMTP_PASSWORD missing in .env file!")
+        
+        # Initialize LLM for headline generation
+        try:
+            from src.tools.summarizer.summarizer_agent import SummarizerAgent
+            self.summarizer = SummarizerAgent()
+            self.use_llm_headlines = True
+            print("✅ LLM headline generation enabled")
+        except Exception as e:
+            print(f"⚠️ LLM headline generation disabled: {e}")
+            self.summarizer = None
+            self.use_llm_headlines = False
 
     def get_dynamic_gif(self):
-        """Rotate GIFs based on day of month"""
+        """Rotate GIFs based on day of month - 15+ premium AI/tech themed animations"""
         day = datetime.now().day
         gifs = [
-            "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif",
-            "https://media.giphy.com/media/xUPGcdhiQf0vS1fX5a/giphy.gif",
-            "https://media.giphy.com/media/26BRQTezZrKak4BeE/giphy.gif",
-            "https://media.giphy.com/media/26BRzozg4TCBXv6QU/giphy.gif",
-            "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif",
+            # AI Brain & Neural Networks
+            "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif",  # AI Brain
+            "https://media.giphy.com/media/xUPGcdhiQf0vS1fX5a/giphy.gif",  # Neural Network
+            "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif",  # Tech Animation
+            
+            # Robots & Technology
+            "https://media.giphy.com/media/26BRQTezZrKak4BeE/giphy.gif",  # Robot
+            "https://media.giphy.com/media/26BRzozg4TCBXv6QU/giphy.gif",  # Tech
+            "https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif",  # AI Animation
+            
+            # Data & Analytics
+            "https://media.giphy.com/media/JqmupuTVZYaQX5s094/giphy.gif",  # Data Flow
+            "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",  # Analytics
+            "https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif",  # Processing
+            
+            # Futuristic & Digital
+            "https://media.giphy.com/media/3oKIPlifLxdigaD2Y8/giphy.gif",  # Rocket/Launch
+            "https://media.giphy.com/media/citBl9yPwnUOs/giphy.gif",  # Code/Matrix
+            "https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif",  # Digital
+            
+            # Innovation & Growth
+            "https://media.giphy.com/media/KJ1f5iTl4Oo7u/giphy.gif",  # Innovation
+            "https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif",  # Star/Success
+            "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif",  # Tech Wave
         ]
         return gifs[day % len(gifs)]
+    
+    def get_header_gif(self):
+        """Get header GIF based on time of day"""
+        hour = datetime.now().hour
+        if hour < 12:
+            # Morning - energetic, bright
+            return "https://media.giphy.com/media/3oKIPlifLxdigaD2Y8/giphy.gif"
+        elif hour < 18:
+            # Afternoon - productive, focused
+            return "https://media.giphy.com/media/JqmupuTVZYaQX5s094/giphy.gif"
+        else:
+            # Evening - calm, analytical
+            return "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
+    
+    def get_sentiment_gif(self, sentiment):
+        """Get sentiment-specific GIF"""
+        sentiment_gifs = {
+            'POSITIVE': "https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif",  # Star/Success
+            'NEGATIVE': "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif",  # Alert/Warning
+            'NEUTRAL': "https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif"  # Information
+        }
+        return sentiment_gifs.get(sentiment, sentiment_gifs['NEUTRAL'])
+    
+    def get_divider_gif(self):
+        """Get animated divider GIF"""
+        dividers = [
+            "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif",
+            "https://media.giphy.com/media/xUPGcdhiQf0vS1fX5a/giphy.gif",
+        ]
+        return dividers[datetime.now().day % len(dividers)]
 
     def send_summary(self, trends: List[Dict], executive_summary: str = None) -> bool:
         """
@@ -162,7 +222,7 @@ class EmailAgent:
 
     def render_email(self, trends: List[Dict], executive_summary: str = None) -> str:
         """
-        Render HTML email with embedded template
+        Render professional HTML email with clean, attractive design
 
         Args:
             trends: List of trend dictionaries
@@ -171,24 +231,43 @@ class EmailAgent:
         Returns:
             HTML string
         """
-        # Sentiment configuration
+        # Professional color scheme
         sentiment_config = {
-            'POSITIVE': {'emoji': '🟢', 'color': '#10B981', 'bg': '#D1FAE5', 'border': '#34D399'},
-            'NEGATIVE': {'emoji': '🔴', 'color': '#EF4444', 'bg': '#FEE2E2', 'border': '#F87171'},
-            'NEUTRAL': {'emoji': '🟡', 'color': '#F59E0B', 'bg': '#FEF3C7', 'border': '#FBBF24'}
+            'POSITIVE': {
+                'emoji': '✓', 
+                'icon': '🟢',
+                'color': '#059669', 
+                'bg': '#ECFDF5', 
+                'border': '#10B981',
+                'light': '#D1FAE5'
+            },
+            'NEGATIVE': {
+                'emoji': '✗', 
+                'icon': '🔴',
+                'color': '#DC2626', 
+                'bg': '#FEF2F2', 
+                'border': '#EF4444',
+                'light': '#FEE2E2'
+            },
+            'NEUTRAL': {
+                'emoji': '●', 
+                'icon': '🔵',
+                'color': '#2563EB', 
+                'bg': '#EFF6FF', 
+                'border': '#3B82F6',
+                'light': '#DBEAFE'
+            }
         }
 
         # Count sentiments
         sentiment_counts = {'POSITIVE': 0, 'NEGATIVE': 0, 'NEUTRAL': 0}
         for trend in trends:
-            # FIXED: Handle both 'sentiment' and 'sentiment_label' keys
             sentiment = trend.get('sentiment', trend.get('sentiment_label', 'NEUTRAL')).upper()
             sentiment_counts[sentiment] = sentiment_counts.get(sentiment, 0) + 1
 
-        # Build trend cards
+        # Build professional trend cards
         trends_html = ""
         for idx, trend in enumerate(trends[:10], 1):
-            # FIXED: Handle both 'sentiment' and 'sentiment_label' keys
             sentiment = trend.get('sentiment', trend.get('sentiment_label', 'NEUTRAL')).upper()
             config = sentiment_config.get(sentiment, sentiment_config['NEUTRAL'])
 
@@ -198,205 +277,287 @@ class EmailAgent:
             title = self._extract_title(summary, idx)
 
             trends_html += f"""
-            <div style="background: white; margin-bottom: 25px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 5px solid {config['border']};">
-
-                <div style="background: linear-gradient(135deg, {config['bg']} 0%, white 100%); padding: 20px 25px; border-bottom: 1px solid #E5E7EB;">
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                        <tr>
-                            <td style="vertical-align: middle;">
-                                <h3 style="color: #111827; margin: 0; font-size: 20px; font-weight: 700; line-height: 1.3;">
-                                    <span style="color: {config['color']};">#{idx}</span> {title}
-                                </h3>
-                            </td>
-                            <td style="vertical-align: middle; text-align: right; white-space: nowrap; padding-left: 15px;">
-                                <span style="background: {config['color']}; color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block;">
-                                    {source}
-                                </span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div style="padding: 25px;">
-                    <p style="color: #374151; line-height: 1.8; margin: 0 0 20px 0; font-size: 16px;">
-                        {summary}
-                    </p>
-
-                    <div style="display: inline-block; background: {config['bg']}; border: 2px solid {config['color']}; border-radius: 8px; padding: 10px 18px;">
-                        <strong style="color: #111827; font-size: 13px; font-weight: 600; letter-spacing: 0.3px;">SENTIMENT:</strong>
-                        <span style="color: {config['color']}; font-weight: 700; font-size: 15px; margin-left: 8px;">
-                            {config['emoji']} {sentiment}
-                        </span>
-                    </div>
-                </div>
-
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px;">
+                <tr>
+                    <td>
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            
+                            <!-- Card Header -->
+                            <tr>
+                                <td style="padding: 20px 24px; border-bottom: 1px solid #E5E7EB; background: {config['bg']};">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                            <td style="vertical-align: middle; width: 40px;">
+                                                <div style="width: 36px; height: 36px; background: {config['color']}; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 700;">
+                                                    {idx}
+                                                </div>
+                                            </td>
+                                            <td style="vertical-align: middle; padding-left: 16px;">
+                                                <h3 style="margin: 0; color: #111827; font-size: 18px; font-weight: 600; line-height: 1.4;">
+                                                    {title}
+                                                </h3>
+                                            </td>
+                                            <td style="vertical-align: middle; text-align: right; padding-left: 16px;">
+                                                <span style="display: inline-block; padding: 4px 12px; background: {config['color']}; color: white; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;">
+                                                    {source}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                            <!-- Card Body -->
+                            <tr>
+                                <td style="padding: 24px;">
+                                    <p style="margin: 0 0 20px 0; color: #4B5563; font-size: 15px; line-height: 1.7; font-weight: 400;">
+                                        {summary}
+                                    </p>
+                                    
+                                    <table cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                            <td style="padding: 8px 16px; background: {config['light']}; border-left: 3px solid {config['color']}; border-radius: 4px;">
+                                                <span style="color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Sentiment:</span>
+                                                <span style="color: {config['color']}; font-size: 14px; font-weight: 700; margin-left: 8px;">
+                                                    {config['icon']} {sentiment}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </td>
+                </tr>
+            </table>
             """
 
         # Executive summary section
         exec_section = ""
         if executive_summary:
             exec_section = f"""
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; margin-bottom: 35px; border-radius: 16px; box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);">
-                <div style="text-align: center; margin-bottom: 15px;">
-                    <span style="font-size: 48px;">📊</span>
-                </div>
-                <h2 style="margin: 0 0 20px 0; font-size: 26px; color: white; text-align: center; font-weight: 700; letter-spacing: 0.5px;">
-                    Executive Summary
-                </h2>
-                <p style="margin: 0; line-height: 1.9; font-size: 17px; color: #F3F4F6; text-align: center; font-weight: 400;">
-                    {executive_summary}
-                </p>
-            </div>
-            """
-
-        # Stats dashboard
-        stats_html = f"""
-        <div style="background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); padding: 30px; border-radius: 16px; margin-bottom: 35px;">
-            <h3 style="color: #111827; margin: 0 0 20px 0; font-size: 20px; font-weight: 700; text-align: center;">
-                📈 Today's Analytics
-            </h3>
-            <table width="100%" cellpadding="15" cellspacing="0" border="0">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 32px;">
                 <tr>
-                    <td align="center" style="min-width: 120px;">
-                        <div style="font-size: 36px; font-weight: 800; color: #4F46E5; margin-bottom: 5px;">
-                            {len(trends)}
-                        </div>
-                        <div style="color: #6B7280; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
-                            Total Trends
-                        </div>
-                    </td>
-                    <td align="center" style="min-width: 120px;">
-                        <div style="font-size: 36px; font-weight: 800; color: #10B981; margin-bottom: 5px;">
-                            {sentiment_counts.get('POSITIVE', 0)}
-                        </div>
-                        <div style="color: #6B7280; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
-                            🟢 Positive
-                        </div>
-                    </td>
-                    <td align="center" style="min-width: 120px;">
-                        <div style="font-size: 36px; font-weight: 800; color: #EF4444; margin-bottom: 5px;">
-                            {sentiment_counts.get('NEGATIVE', 0)}
-                        </div>
-                        <div style="color: #6B7280; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
-                            🔴 Negative
-                        </div>
-                    </td>
-                    <td align="center" style="min-width: 120px;">
-                        <div style="font-size: 36px; font-weight: 800; color: #F59E0B; margin-bottom: 5px;">
-                            {sentiment_counts.get('NEUTRAL', 0)}
-                        </div>
-                        <div style="color: #6B7280; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
-                            🟡 Neutral
-                        </div>
+                    <td style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%); padding: 32px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td style="text-align: center; padding-bottom: 16px;">
+                                    <div style="font-size: 48px;">📊</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h2 style="margin: 0 0 16px 0; color: #FFFFFF; font-size: 24px; font-weight: 700; text-align: center; letter-spacing: -0.5px;">
+                                        Executive Summary
+                                    </h2>
+                                    <p style="margin: 0; color: #DBEAFE; font-size: 16px; line-height: 1.7; text-align: center; font-weight: 400;">
+                                        {executive_summary}
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
-        </div>
+            """
+
+        # Professional stats section
+        stats_html = f"""
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 32px;">
+            <tr>
+                <td style="padding: 24px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px;">
+                    <h3 style="margin: 0 0 20px 0; color: #111827; font-size: 18px; font-weight: 600; text-align: center;">
+                        📈 Today's Overview
+                    </h3>
+                    <table width="100%" cellpadding="12" cellspacing="0" border="0">
+                        <tr>
+                            <td align="center" style="width: 25%; padding: 12px;">
+                                <div style="background: #FFFFFF; padding: 16px; border-radius: 6px; border: 1px solid #E5E7EB;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #1F2937; margin-bottom: 4px;">
+                                        {len(trends)}
+                                    </div>
+                                    <div style="color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        Total
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="center" style="width: 25%; padding: 12px;">
+                                <div style="background: #ECFDF5; padding: 16px; border-radius: 6px; border: 1px solid #10B981;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #059669; margin-bottom: 4px;">
+                                        {sentiment_counts.get('POSITIVE', 0)}
+                                    </div>
+                                    <div style="color: #047857; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        Positive
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="center" style="width: 25%; padding: 12px;">
+                                <div style="background: #FEF2F2; padding: 16px; border-radius: 6px; border: 1px solid #EF4444;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #DC2626; margin-bottom: 4px;">
+                                        {sentiment_counts.get('NEGATIVE', 0)}
+                                    </div>
+                                    <div style="color: #B91C1C; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        Negative
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="center" style="width: 25%; padding: 12px;">
+                                <div style="background: #EFF6FF; padding: 16px; border-radius: 6px; border: 1px solid #3B82F6;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #2563EB; margin-bottom: 4px;">
+                                        {sentiment_counts.get('NEUTRAL', 0)}
+                                    </div>
+                                    <div style="color: #1D4ED8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        Neutral
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
         """
 
-        # Current date
+        # Get dynamic GIF
         current_date = datetime.now().strftime('%B %d, %Y')
         day_of_week = datetime.now().strftime('%A')
         gif_url = self.get_dynamic_gif()
 
-        # Complete HTML template
+        # Professional HTML template
         html = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily AI Trends Report</title>
+    <title>AI Trends Report - {current_date}</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px;">
-
-    <div style="max-width: 680px; margin: 0 auto; background-color: #FFFFFF; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-
-        <!-- Hero Header -->
-        <div style="background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); padding: 50px 40px; text-align: center;">
-            <div style="font-size: 72px; margin-bottom: 15px;">🤖</div>
-            <h1 style="color: #FFFFFF; margin: 0 0 12px 0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-                Daily AI Trends
-            </h1>
-            <p style="color: #E0E7FF; margin: 0 0 8px 0; font-size: 18px; font-weight: 600;">
-                {day_of_week}, {current_date}
-            </p>
-            <div style="display: inline-block; background: rgba(255,255,255,0.2); border-radius: 20px; padding: 8px 20px; margin-top: 10px;">
-                <span style="color: white; font-size: 14px; font-weight: 600; letter-spacing: 1px;">
-                    🔥 CURATED FOR YOU
-                </span>
-            </div>
-        </div>
-
-        <!-- Animated GIF Banner -->
-        <div style="background: #1F2937; text-align: center; border-top: 4px solid #7C3AED; border-bottom: 4px solid #7C3AED;">
-            <img src="{gif_url}" 
-                 alt="AI Animation" 
-                 style="width: 100%; max-width: 680px; display: block; margin: 0;">
-        </div>
-
-        <!-- Main Content -->
-        <div style="padding: 45px 40px;">
-
-            <!-- Welcome Message -->
-            <div style="background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%); padding: 25px; border-radius: 12px; margin-bottom: 35px; border-left: 5px solid #4F46E5;">
-                <p style="color: #1E1B4B; font-size: 17px; line-height: 1.8; margin: 0; font-weight: 500;">
-                    👋 <strong>Welcome back!</strong> Here are today's most important developments in artificial intelligence, 
-                    carefully curated and analyzed just for you. Stay ahead of the curve with insights from across the AI landscape.
-                </p>
-            </div>
-
-            {exec_section}
-
-            {stats_html}
-
-            <!-- Section Header -->
-            <div style="text-align: center; margin: 40px 0 35px 0;">
-                <div style="font-size: 48px; margin-bottom: 15px;">📰</div>
-                <h2 style="color: #111827; font-size: 32px; margin: 0; font-weight: 800; letter-spacing: -0.5px;">
-                    Today's Top Trends
-                </h2>
-                <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #4F46E5, #7C3AED); margin: 15px auto 0; border-radius: 2px;"></div>
-            </div>
-
-            <!-- Trend Cards -->
-            {trends_html}
-
-            <!-- Divider -->
-            <div style="height: 2px; background: linear-gradient(90deg, transparent, #E5E7EB, transparent); margin: 50px 0;"></div>
-
-            <!-- Call to Action -->
-            <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); padding: 30px; border-radius: 16px; text-align: center; border: 2px solid #F59E0B;">
-                <div style="font-size: 42px; margin-bottom: 12px;">💡</div>
-                <h3 style="color: #78350F; margin: 0 0 12px 0; font-size: 22px; font-weight: 700;">
-                    Stay Informed, Stay Ahead
-                </h3>
-                <p style="color: #92400E; font-size: 15px; margin: 0; line-height: 1.6;">
-                    Want to customize your trends? Let us know what topics interest you most!
-                </p>
-            </div>
-
-        </div>
-
-        <!-- Footer -->
-        <div style="background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%); padding: 40px; text-align: center; border-top: 2px solid #E5E7EB;">
-            <div style="font-size: 36px; margin-bottom: 15px;">💌</div>
-            <p style="color: #6B7280; font-size: 16px; margin: 0 0 12px 0; font-weight: 600;">
-                Sent automatically by your AI Trend Analyzer
-            </p>
-            <p style="color: #9CA3AF; font-size: 14px; margin: 0 0 20px 0;">
-                Powered by LangGraph & Claude AI • Generated on {current_date}
-            </p>
-            <div style="border-top: 1px solid #E5E7EB; padding-top: 20px; margin-top: 20px;">
-                <p style="color: #D1D5DB; font-size: 12px; margin: 0;">
-                    © 2025 AI Trends Analyzer. All rights reserved.
-                </p>
-            </div>
-        </div>
-
-    </div>
-
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #F3F4F6;">
+    
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #F3F4F6; padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                
+                <!-- Main Container -->
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 680px; background-color: #FFFFFF; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%); padding: 40px 32px; text-align: center;">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <div style="font-size: 64px; margin-bottom: 16px;">🤖</div>
+                                        <h1 style="margin: 0 0 8px 0; color: #FFFFFF; font-size: 32px; font-weight: 700; letter-spacing: -0.5px;">
+                                            AI Trends Report
+                                        </h1>
+                                        <p style="margin: 0; color: #BFDBFE; font-size: 16px; font-weight: 500;">
+                                            {day_of_week}, {current_date}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Banner GIF -->
+                    <tr>
+                        <td style="background: #1F2937; padding: 0; border-top: 3px solid #3B82F6; border-bottom: 3px solid #3B82F6;">
+                            <img src="{gif_url}" alt="AI Technology" style="width: 100%; display: block; max-width: 680px; height: auto;">
+                        </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                        <td style="padding: 40px 32px;">
+                            
+                            <!-- Welcome Message -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 32px;">
+                                <tr>
+                                    <td style="padding: 20px 24px; background: #F9FAFB; border-left: 4px solid #3B82F6; border-radius: 6px;">
+                                        <p style="margin: 0; color: #374151; font-size: 15px; line-height: 1.7; font-weight: 400;">
+                                            <strong style="color: #111827; font-weight: 600;">Welcome to your daily AI intelligence briefing.</strong> 
+                                            We've curated the most significant developments in artificial intelligence to keep you informed and ahead of the curve.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            {exec_section}
+                            
+                            {stats_html}
+                            
+                            <!-- Section Divider -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 32px 0;">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <div style="font-size: 40px; margin-bottom: 12px;">📰</div>
+                                        <h2 style="margin: 0 0 8px 0; color: #111827; font-size: 24px; font-weight: 700;">
+                                            Today's Key Insights
+                                        </h2>
+                                        <div style="width: 60px; height: 3px; background: #3B82F6; margin: 0 auto; border-radius: 2px;"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Trend Cards -->
+                            {trends_html}
+                            
+                            <!-- Divider -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 40px 0 32px 0;">
+                                <tr>
+                                    <td style="border-top: 2px solid #E5E7EB;"></td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Footer CTA -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="padding: 24px; background: #FFFBEB; border: 1px solid #FCD34D; border-radius: 6px; text-align: center;">
+                                        <div style="font-size: 32px; margin-bottom: 12px;">💡</div>
+                                        <h3 style="margin: 0 0 8px 0; color: #92400E; font-size: 18px; font-weight: 600;">
+                                            Stay Ahead of the Curve
+                                        </h3>
+                                        <p style="margin: 0; color: #78350F; font-size: 14px; line-height: 1.6;">
+                                            Questions or feedback? We'd love to hear from you.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background: #F9FAFB; padding: 32px; text-align: center; border-top: 1px solid #E5E7EB;">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <p style="margin: 0 0 8px 0; color: #6B7280; font-size: 14px; font-weight: 500;">
+                                            AI Trends Analyzer
+                                        </p>
+                                        <p style="margin: 0 0 16px 0; color: #9CA3AF; font-size: 13px;">
+                                            Powered by Advanced AI • {current_date}
+                                        </p>
+                                        <div style="border-top: 1px solid #E5E7EB; padding-top: 16px; margin-top: 16px;">
+                                            <p style="margin: 0; color: #D1D5DB; font-size: 12px;">
+                                                © 2025 AI Trends Analyzer. All rights reserved.
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+    
 </body>
 </html>
         """
@@ -404,7 +565,18 @@ class EmailAgent:
         return html
 
     def _extract_title(self, summary: str, idx: int) -> str:
-        """Extract or generate an engaging title from summary"""
+        """Generate an engaging title using LLM or fallback to extraction"""
+        
+        # Try to use LLM for headline generation
+        if self.use_llm_headlines and self.summarizer:
+            try:
+                headline = self.summarizer.generate_headline(summary)
+                if headline and headline != "AI Trend Update":
+                    return headline
+            except Exception as e:
+                print(f"⚠️ LLM headline generation failed: {e}")
+        
+        # Fallback: extract from summary
         sentences = summary.split('.')
         if sentences and len(sentences[0]) > 10:
             title = sentences[0].strip()

@@ -215,7 +215,7 @@ Local SQLite database, password-protected admin panel, and secure email configur
 
 **Step 1: Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/ai-trend-notifier.git
+git clone https://github.com/tapasbarman-ai/ai-trend-notifier.git
 cd ai-trend-notifier
 ```
 
@@ -370,64 +370,59 @@ pause
 ```
 ai-trend-notifier/
 │
-├── 📂 data/
-│   └── 📂 db/
-│       ├── trends.db              # Main trends database
-│       ├── newsletter.db          # Subscriber database
-│       └── schema.sql             # Database schemas
+├── 📂 backend/                    # FastAPI Backend 
+│   ├── auth.py
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   ├── schemas.py
+│   └── 📂 routers/
 │
-├── 📂 src/
+├── 📂 frontend/                   # Next.js Frontend 
+│   ├── 📂 app/
+│   ├── 📂 components/
+│   ├── 📂 utils/
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── 📂 src/                        # Core Agent Logic
 │   ├── 📂 config/
 │   │   ├── __init__.py
-│   │   └── settings.py            # Environment configuration
+│   │   └── settings.py
 │   │
-│   ├── 📂 langgraph/
-│   │   ├── __init__.py
+│   ├── 📂 langgraph/              # Orchestration
 │   │   ├── 📂 nodes/
-│   │   │   ├── __init__.py
-│   │   │   ├── ingestion_node.py      # Twitter/Reddit fetching
-│   │   │   ├── sentiment_node.py      # Sentiment analysis
-│   │   │   ├── enrichment_node.py     # Web search enrichment
-│   │   │   ├── summarizer_node.py     # LLM summarization
-│   │   │   └── notifier_node.py       # Database & email
-│   │   └── graph.py               # LangGraph workflow
+│   │   └── graph.py
 │   │
-│   ├── 📂 tools/
-│   │   ├── __init__.py
-│   │   ├── 📂 twitter/
-│   │   │   ├── __init__.py
-│   │   │   └── twitter_agent.py
-│   │   ├── 📂 reddit/
-│   │   │   ├── __init__.py
-│   │   │   └── reddit_agent.py
-│   │   ├── 📂 sentiment/
-│   │   │   ├── __init__.py
-│   │   │   └── sentiment_agent.py
-│   │   ├── 📂 websearch/
-│   │   │   ├── __init__.py
-│   │   │   └── websearch_agent.py
-│   │   ├── 📂 summarizer/
-│   │   │   ├── __init__.py
-│   │   │   └── summarizer_agent.py
-│   │   └── 📂 notifier/
-│   │       ├── __init__.py
-│   │       └── email_agent.py
+│   ├── 📂 orchestrator/           # Scheduling
+│   │   └── simple_scheduler.py
 │   │
-│   └── 📂 orchestrator/
-│       ├── __init__.py
-│       └── simple_scheduler.py    # Automated scheduling
+│   └── 📂 tools/                  # Agent Tools
+│       ├── 📂 twitter/
+│       ├── 📂 reddit/
+│       ├── 📂 sentiment/
+│       ├── 📂 websearch/
+│       ├── 📂 summarizer/
+│       └── 📂 notifier/
 │
-├── 📂 web/
-│   └── app.py                     # Streamlit dashboard
+├── 📂 web/                        # Streamlit Dashboard (Original)
+│   ├── app.py
+│   └── trends.db
 │
-├── 📄 .env                        # Environment variables (create this)
+├── 📂 data/
+│   └── 📂 db/
+│
+├── 📄 .env
+├── 📄 .env.example
 ├── 📄 .gitignore
-├── 📄 requirements_windows.txt    # Python dependencies
-├── 📄 init_db.py                  # Database initialization
-├── 📄 run_pipeline.py             # Manual pipeline execution
-├── 📄 setup_project.py            # Project setup script
-├── 📄 LICENSE
-└── 📄 README.md
+├── 📄 ai_trend_notifier.db
+├── 📄 docker-compose.yml
+├── 📄 init_db.py
+├── 📄 README.md
+├── 📄 requirements.txt
+├── 📄 run_pipeline_integrated.py
+├── 📄 start_project.bat
+└── 📄 start_project.ps1
 ```
 
 ---
@@ -649,11 +644,13 @@ Special thanks to these amazing projects:
 
 <div align="center">
 
-**Your Name** - *Creator & Lead Developer*
+**Tapas Barman** - *Creator & Lead Developer*
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/tapasbarman-ai)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tapas-barman-2661161a0/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tapasb.dev@gmail.com)
+[![Kaggle](https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=Kaggle&logoColor=white)](https://www.kaggle.com/tapasbarman)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Host-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://portfolio-tapas000s-projects.vercel.app)
 
 </div>
 
@@ -667,18 +664,20 @@ Special thanks to these amazing projects:
 
 ### 💬 Get Help
 
-- 📧 Email: your.email@example.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/ai-trend-notifier/issues)
-- 💡 Discussions: [GitHub Discussions](https://github.com/yourusername/ai-trend-notifier/discussions)
+- 📧 Email: tapasb.dev@gmail.com
+- 🐛 Issues: [GitHub Issues](https://github.com/tapasbarman-ai/ai-trend-notifier/issues)
+- 💡 Discussions: [GitHub Discussions](https://github.com/tapasbarman-ai/ai-trend-notifier/discussions)
 
 </td>
 <td>
 
 ### 🌐 Connect
 
-- 🐦 Twitter: [@yourhandle](https://twitter.com/yourhandle)
-- 💼 LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
-- 🌍 Website: [yourwebsite.com](https://yourwebsite.com)
+- � LinkedIn: [Tapas Barman](https://www.linkedin.com/in/tapas-barman-2661161a0/)
+- � GitHub: [tapasbarman-ai](https://github.com/tapasbarman-ai)
+- 🏆 Kaggle: [tapasbarman](https://www.kaggle.com/tapasbarman)
+- 🌍 Portfolio: [portfolio-tapas000s-projects.vercel.app](https://portfolio-tapas000s-projects.vercel.app)
+- 📞 Phone: 7363971909
 
 </td>
 </tr>
@@ -719,14 +718,14 @@ Special thanks to these amazing projects:
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/ai-trend-notifier?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/ai-trend-notifier?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/yourusername/ai-trend-notifier?style=social)
+![GitHub stars](https://img.shields.io/github/stars/tapasbarman-ai/ai-trend-notifier?style=social)
+![GitHub forks](https://img.shields.io/github/forks/tapasbarman-ai/ai-trend-notifier?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/tapasbarman-ai/ai-trend-notifier?style=social)
 
-![GitHub issues](https://img.shields.io/github/issues/yourusername/ai-trend-notifier)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/yourusername/ai-trend-notifier)
-![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/ai-trend-notifier)
-![GitHub code size](https://img.shields.io/github/languages/code-size/yourusername/ai-trend-notifier)
+![GitHub issues](https://img.shields.io/github/issues/tapasbarman-ai/ai-trend-notifier)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/tapasbarman-ai/ai-trend-notifier)
+![GitHub last commit](https://img.shields.io/github/last-commit/tapasbarman-ai/ai-trend-notifier)
+![GitHub code size](https://img.shields.io/github/languages/code-size/tapasbarman-ai/ai-trend-notifier)
 
 </div>
 

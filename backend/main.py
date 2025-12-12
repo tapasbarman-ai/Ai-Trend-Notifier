@@ -1,0 +1,32 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from . import models, database
+from .routers import auth, subscribers, newsletters, pipeline
+
+# Create database tables
+models.Base.metadata.create_all(bind=database.engine)
+
+app = FastAPI(title="AI Trend Notifier API")
+
+# CORS setup
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(auth.router)
+app.include_router(subscribers.router)
+app.include_router(newsletters.router)
+app.include_router(pipeline.router)
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to AI Trend Notifier API"}
