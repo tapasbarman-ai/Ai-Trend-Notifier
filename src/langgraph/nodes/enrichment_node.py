@@ -15,7 +15,9 @@ def enrichment_node(state):
     for trend in state['trends']:
         query = trend['content'][:100]
         enriched = search.search(query)
-        trend['enriched_data'] = str(enriched)
+        # Use json.dumps to ensure valid JSON format that is easy to parse
+        import json
+        trend['enriched_data'] = json.dumps(enriched)
 
     print(f"   ✅ Enriched {len(state['trends'])} trends")
     return state
