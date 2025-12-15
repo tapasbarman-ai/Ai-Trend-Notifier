@@ -25,7 +25,7 @@
 
 ### Watch the Full Walkthrough
 
-**[▶️ View Demo on YouTube](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)**
+**[▶️ View Demo on YouTube](https://youtu.be/p9FM-yghvfs)**
 
 *See the system in action: data ingestion, sentiment analysis, web enrichment, and newsletter generation*
 
@@ -311,43 +311,6 @@ start_project.bat
 ```powershell
 .\start_project.ps1
 ```
-
-### Method 1: Launch Streamlit Dashboard (Legacy)
-
-```bash
-streamlit run web/app.py
-```
-
-Then open your browser to: **http://localhost:8501**
-
-### Method 2: Manual Pipeline Run
-
-```bash
-python run_pipeline.py
-```
-
-### Method 3: Automated Scheduling
-
-```bash
-# Keep this terminal running - runs daily at 9:00 AM
-python -m src.orchestrator.simple_scheduler
-```
-
-### Method 4: Windows Task Scheduler (Production)
-
-1. Create `run_pipeline.bat`:
-```batch
-@echo off
-cd /d C:\path\to\ai-trend-notifier
-call .venv\Scripts\activate
-python run_pipeline.py
-pause
-```
-
-2. Open Task Scheduler (`Win + R` → `taskschd.msc`)
-3. Create Basic Task → Daily → 9:00 AM → Start Program → Select `run_pipeline.bat`
-
----
 
 ## 🎨 Dashboard Features
 
