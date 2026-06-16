@@ -14,10 +14,14 @@ const config: Config = {
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
             colors: {
-                primary: '#0f172a', // Slate 900
-                secondary: '#334155', // Slate 700
-                accent: '#3b82f6', // Blue 500
+                primary: '#6366f1', // Indigo 500
+                secondary: '#4f46e5', // Violet-Indigo
+                accent: '#a855f7', // Violet 500
+                darkBg: '#030712', // Deep Space Slate 950
+                cardBg: 'rgba(17, 24, 39, 0.5)', // Translucent Card
+                borderGray: 'rgba(255, 255, 255, 0.06)' // Translucent borders
             }
+
         },
     },
     plugins: [],
