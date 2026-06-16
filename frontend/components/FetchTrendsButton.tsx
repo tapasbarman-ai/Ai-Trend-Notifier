@@ -2,42 +2,62 @@
 
 import { useState } from 'react';
 import api from '@/utils/api';
-import { Loader2, RefreshCw } from 'lucide-react';
+import { Loader2, RefreshCw, Zap, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function FetchTrendsButton() {
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
+    const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
     const handleFetch = async () => {
         setLoading(true);
-        setMessage('');
+        setStatus('idle');
         try {
             await api.post('/pipeline/run');
-            setMessage('Pipeline started in background.');
+            setStatus('success');
+            setTimeout(() => setStatus('idle'), 3000);
         } catch (error) {
-            setMessage('Failed to start pipeline.');
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 3000);
         } finally {
             setLoading(false);
-            setTimeout(() => setMessage(''), 3000);
         }
     };
 
     return (
         <div className="flex items-center gap-4">
-            {message && (
-                <span className="text-xs text-indigo-300 font-semibold bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-lg animate-pulse">
-                    {message}
-                </span>
-            )}
             <button
                 onClick={handleFetch}
                 disabled={loading}
-                className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/10 hover:border-white/20 active:scale-95 transition-all disabled:opacity-50"
+                className={`px-6 py-3 rounded-full font-sans text-label-bold font-bold border-2 transition-all flex items-center gap-2 hover:-translate-y-0.5 active:scale-95 disabled:opacity-75 ${
+                    status === 'success'
+                        ? 'bg-emerald-100 text-emerald-800 border-emerald-500'
+                        : status === 'error'
+                        ? 'bg-rose-100 text-rose-800 border-rose-500'
+                        : 'bg-primary-container text-on-primary-container border-primary hover:shadow-lg hover:shadow-primary-container/20'
+                }`}
             >
-                {loading ? <Loader2 className="animate-spin h-4 w-4 text-primary" /> : <RefreshCw className="h-4 w-4" />}
-                Fetch Latest Trends
+                {loading ? (
+                    <>
+                        <Loader2 className="animate-spin h-5 w-5" />
+                        <span>Fetching...</span>
+                    </>
+                ) : status === 'success' ? (
+                    <>
+                        <CheckCircle2 className="h-5 w-5" />
+                        <span>Trends Updated</span>
+                    </>
+                ) : status === 'error' ? (
+                    <>
+                        <AlertCircle className="h-5 w-5" />
+                        <span>Fetch Failed</span>
+                    </>
+                ) : (
+                    <>
+                        <Zap className="h-5 w-5" />
+                        <span>Fetch Latest Trends</span>
+                    </>
+                )}
             </button>
         </div>
-
     );
 }
