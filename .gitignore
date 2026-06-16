@@ -358,3 +358,8 @@ recordings/
 
 # Keep empty directories with .gitkeep
 !**/.gitkeep
+
+# Next.js build directory
+.next/
+frontend/.next/
+
