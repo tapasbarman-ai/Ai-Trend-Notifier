@@ -1,12 +1,20 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+    subsets: ['latin'],
+    variable: '--font-inter',
+})
+
+const plusJakartaSans = Plus_Jakarta_Sans({ 
+    subsets: ['latin'],
+    variable: '--font-plus-jakarta',
+})
 
 export const metadata: Metadata = {
-    title: 'AI Trend Notifier',
+    title: 'AI Insights',
     description: 'Stay ahead of the curve with the latest AI trends.',
 }
 
@@ -17,7 +25,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={`${inter.variable} ${plusJakartaSans.variable} font-sans`}>
                 <Navbar />
                 <main className="pt-20 min-h-screen">
                     {children}
@@ -26,3 +34,4 @@ export default function RootLayout({
         </html>
     )
 }
+

@@ -2,26 +2,33 @@ import Link from 'next/link';
 
 export default function Navbar() {
     return (
-        <nav className="w-full py-4 px-6 border-b border-white/5 bg-darkBg/60 backdrop-blur-md fixed top-0 z-50 transition-all duration-300">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <Link href="/" className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-indigo-400 to-accent bg-clip-text text-transparent hover:opacity-90 transition-opacity">
-                    AI Trend Notifier
+        <header className="bg-background dark:bg-inverse-surface border-b border-outline-variant dark:border-outline w-full fixed top-0 z-50 transition-all duration-300">
+            <nav className="flex justify-between items-center px-6 md:px-margin-desktop py-4 max-w-container-max-width mx-auto">
+                <Link href="/" className="font-display text-headline-md font-bold text-on-background dark:text-inverse-on-surface hover:opacity-90 transition-opacity">
+                    AI Insights
                 </Link>
-                <div className="flex gap-6 items-center">
-                    <Link href="/newsletters" className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group py-1">
-                        Newsletters
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                <div className="hidden md:flex gap-8 items-center font-sans text-body-md">
+                    <Link href="/newsletters" className="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-medium">
+                        Feed
                     </Link>
-                    <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group py-1">
-                        Login
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    <Link href="/newsletters" className="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-medium">
+                        Archive
                     </Link>
-                    <Link href="/#subscribe" className="px-5 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-full text-sm font-semibold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                    <Link href="/#subscribe" className="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-medium">
                         Subscribe
                     </Link>
                 </div>
-            </div>
-        </nav>
+                <div className="flex items-center gap-6">
+                    <Link href="/login" className="scale-95 active:scale-90 transition-transform text-primary dark:text-primary-fixed font-sans text-label-bold font-semibold hover:opacity-85">
+                        Sign In
+                    </Link>
+                    <Link href="/#subscribe" className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-sans text-label-bold font-semibold hover:translate-y-[-2px] transition-all glow-yellow-sm hover:bg-primary-container/90">
+                        Get Started
+                    </Link>
+                </div>
+            </nav>
+        </header>
     );
 }
+
 

@@ -2,46 +2,59 @@ import SubscribeForm from './SubscribeForm';
 
 export default function Hero() {
     return (
-        <section className="py-24 px-6 text-center relative overflow-hidden">
-            {/* Background glowing glow circles */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
-            <div className="absolute top-1/3 left-1/3 w-60 h-60 bg-accent/5 rounded-full blur-[80px] pointer-events-none"></div>
-
-            <div className="max-w-4xl mx-auto space-y-10 relative z-10">
-                <div className="space-y-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 border border-primary/20 text-indigo-300 uppercase tracking-wider">
-                        ⚡ AI-Powered Ingestion Pipeline
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-accent leading-none">
-                        Master the Future of AI
+        <section className="relative overflow-hidden pt-12 pb-20 px-6 md:px-margin-desktop bg-background text-on-background">
+            <div className="max-w-container-max-width mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="z-10 text-left">
+                    <div className="inline-flex items-center gap-2 bg-primary-container/30 text-on-primary-container px-4 py-1.5 rounded-full mb-8">
+                        <span className="font-sans text-label-bold font-bold tracking-wider text-[11px]">TRUSTED BY 1,500+ PROFESSIONALS</span>
+                    </div>
+                    
+                    <h1 className="font-display text-headline-lg md:text-display-xl mb-6 text-on-background leading-tight uppercase font-extrabold">
+                        DIVE INTO THE <span className="text-primary-container bg-inverse-surface px-4 inline-block rounded-lg">FUTURE</span> OF AI
                     </h1>
+                    
+                    <p className="font-sans text-body-lg text-on-surface-variant mb-10 max-w-xl leading-relaxed">
+                        Professional-grade analysis delivered directly to your inbox. We parse millions of social signals to bring you the insights that actually matter.
+                    </p>
+                    
+                    {/* High-Conversion Subscription Form */}
+                    <div className="relative max-w-md" id="subscribe">
+                        <SubscribeForm />
+                    </div>
+                    
+                    {/* Hero Trust Metrics */}
+                    <div className="mt-12 flex flex-wrap gap-12 pt-8 border-t border-outline-variant">
+                        <div>
+                            <div className="font-display text-headline-md text-on-background font-bold">99%</div>
+                            <div className="font-sans text-label-bold text-on-surface-variant uppercase tracking-wider text-xs">Sentiment Accuracy</div>
+                        </div>
+                        <div className="border-l border-outline-variant pl-12">
+                            <div className="font-display text-headline-md text-on-background font-bold">2.4ms</div>
+                            <div className="font-sans text-label-bold text-on-surface-variant uppercase tracking-wider text-xs">Analysis Speed</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                    Get real-time AI trends, sentiment scores, and contextual summaries scraped directly from Reddit and Twitter. Delivered straight to your inbox.
-                </p>
-                
-                <div className="max-w-md mx-auto" id="subscribe">
-                    <SubscribeForm />
-                </div>
-
-                {/* Trust and status metrics */}
-                <div className="grid grid-cols-3 gap-4 md:gap-8 pt-10 border-t border-white/5 max-w-3xl mx-auto text-left">
-                    <div className="p-4 rounded-xl glass-card">
-                        <p className="text-3xl font-extrabold text-white">1,500+</p>
-                        <p className="text-xs text-gray-400 mt-1 font-medium">Subscribers</p>
+                {/* Visual Accent Container on Right */}
+                <div className="relative">
+                    <div className="relative z-10 rounded-3xl overflow-hidden border-2 border-primary-container glow-yellow aspect-[4/3] bg-surface-container-low flex items-center justify-center p-8">
+                        <div className="text-center space-y-4">
+                            <div className="w-16 h-16 rounded-2xl bg-primary-container/30 text-primary flex items-center justify-center mx-auto shadow-md">
+                                <span className="text-2xl font-bold font-display">AI</span>
+                            </div>
+                            <h3 className="font-display text-headline-md text-on-background font-bold">Autonomous Agent Monitoring</h3>
+                            <p className="font-sans text-body-md text-on-surface-variant max-w-sm">
+                                Live updates tracking sentiment swings, keyword spikes, and enriched references parsed across r/MachineLearning and Twitter.
+                            </p>
+                        </div>
                     </div>
-                    <div className="p-4 rounded-xl glass-card">
-                        <p className="text-3xl font-extrabold text-white">94%</p>
-                        <p className="text-xs text-gray-400 mt-1 font-medium">Sentiment Accuracy</p>
-                    </div>
-                    <div className="p-4 rounded-xl glass-card">
-                        <p className="text-3xl font-extrabold text-white">Daily</p>
-                        <p className="text-xs text-gray-400 mt-1 font-medium">Digests Sent</p>
-                    </div>
+                    {/* Decorative radial glows */}
+                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-container/20 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-surface-container-high rounded-full blur-3xl"></div>
                 </div>
             </div>
         </section>
     );
 }
+
 

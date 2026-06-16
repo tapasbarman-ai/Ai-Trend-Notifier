@@ -25,30 +25,29 @@ export default function SubscribeForm() {
 
     return (
         <div className="w-full max-w-md mx-auto">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row p-1.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 p-2 bg-surface-container-lowest border-2 border-primary-container rounded-2xl glow-yellow transition-all focus-within:ring-2 ring-primary-container/50">
                 <input
                     type="email"
-                    placeholder="Enter your email address..."
+                    placeholder="Enter your work email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="flex-1 px-4 py-3 rounded-lg bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm transition-all"
+                    className="flex-grow bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-3 font-sans text-on-background text-sm"
                     disabled={status === 'loading' || status === 'success'}
                 />
                 <button
                     type="submit"
                     disabled={status === 'loading' || status === 'success'}
-                    className="px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg text-sm font-semibold hover:brightness-110 active:scale-95 transition-all shadow-md shadow-primary/10 disabled:opacity-50 flex items-center justify-center min-w-[110px]"
+                    className="bg-primary-container text-on-primary-container font-sans text-label-bold font-bold px-8 py-3 rounded-xl hover:bg-primary-fixed transition-all active:scale-95 flex items-center justify-center min-w-[110px]"
                 >
-                    {status === 'loading' ? <Loader2 className="animate-spin h-4 w-4" /> : 'Subscribe'}
+                    {status === 'loading' ? <Loader2 className="animate-spin h-4 w-4" /> : 'Join Now'}
                 </button>
             </form>
             {message && (
-                <p className={`mt-3 text-xs text-center font-medium ${status === 'success' ? 'text-green-400' : 'text-rose-400'}`}>
+                <p className={`mt-3 text-xs text-center font-medium ${status === 'success' ? 'text-green-600' : 'text-rose-600'}`}>
                     {message}
                 </p>
             )}
         </div>
-
     );
 }
