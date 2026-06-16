@@ -50,10 +50,10 @@ export default function LoginPage() {
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-container mb-4 shadow-sm border-2 border-primary">
                         <BarChart3 className="text-on-primary-container h-8 w-8" />
                     </div>
-                    <h1 className="font-display text-3xl font-extrabold text-on-background tracking-tight">
+                    <h1 className="font-display text-headline-lg text-on-background">
                         AI Insights <span className="text-primary">Admin Portal</span>
                     </h1>
-                    <p className="text-on-surface-variant font-sans text-body-md font-semibold opacity-80">
+                    <p className="text-on-surface-variant font-sans text-body-md opacity-80">
                         Secure access to the corporate analytics engine
                     </p>
                 </div>
@@ -66,7 +66,7 @@ export default function LoginPage() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Email Field */}
                         <div className="space-y-1.5 group">
-                            <label className="block font-sans text-label-bold font-bold text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="email">
+                            <label className="block font-sans text-label-bold text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="email">
                                 Professional Email
                             </label>
                             <div className="relative flex items-center border-b border-outline-variant py-3 focus-within:border-primary transition-all">
@@ -87,10 +87,10 @@ export default function LoginPage() {
                         {/* Password Field */}
                         <div className="space-y-1.5 group">
                             <div className="flex justify-between items-end">
-                                <label className="block font-sans text-label-bold font-bold text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="password">
+                                <label className="block font-sans text-label-bold text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="password">
                                     Access Password
                                 </label>
-                                <a className="text-caption font-sans font-bold text-primary hover:underline transition-all" href="#">
+                                <a className="text-caption font-sans text-primary hover:underline transition-all" href="#">
                                     Forgot?
                                 </a>
                             </div>
@@ -117,7 +117,7 @@ export default function LoginPage() {
                         </div>
 
                         {error && (
-                            <p className="text-rose-600 text-xs font-semibold bg-rose-50 border border-rose-100 rounded-lg p-2.5">
+                            <p className="text-rose-600 text-caption font-caption bg-rose-50 border border-rose-100 rounded-lg p-2.5">
                                 {error}
                             </p>
                         )}
@@ -129,7 +129,7 @@ export default function LoginPage() {
                                 type="checkbox"
                                 className="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer bg-white"
                             />
-                            <label className="text-caption font-sans font-bold text-on-surface-variant cursor-pointer select-none" htmlFor="remember">
+                            <label className="text-caption font-sans text-on-surface-variant cursor-pointer select-none" htmlFor="remember">
                                 Stay signed in for 30 days
                             </label>
                         </div>
@@ -138,7 +138,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-primary-container text-on-primary-container font-sans text-label-bold font-bold py-4 rounded-lg border-2 border-primary hover:shadow-lg hover:shadow-primary-container/20 transition-all duration-300 flex items-center justify-center gap-2 group active:scale-95 disabled:opacity-50"
+                            className="w-full bg-primary-container text-on-primary-container font-sans text-label-bold py-4 rounded-lg border-2 border-primary hover:shadow-lg hover:shadow-primary-container/20 transition-all duration-300 flex items-center justify-center gap-2 group active:scale-95 disabled:opacity-50"
                         >
                             {loading ? 'Verifying access...' : 'Sign In to Portal'}
                             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -147,7 +147,7 @@ export default function LoginPage() {
 
                     {/* Footer text warning */}
                     <div className="mt-8 pt-8 border-t border-outline-variant/30 text-center">
-                        <p className="text-caption font-sans text-on-surface-variant font-medium leading-relaxed">
+                        <p className="text-caption font-sans text-on-surface-variant leading-relaxed">
                             Authorized personnel only. <br />
                             Activity is monitored and recorded.
                         </p>
@@ -156,13 +156,13 @@ export default function LoginPage() {
 
                 {/* Helper info links */}
                 <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
-                    <Link href="#" className="text-caption font-sans text-on-surface-variant font-semibold hover:text-primary transition-colors flex items-center gap-1">
+                    <Link href="#" className="text-caption font-sans text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
                         <HelpCircle className="h-4 w-4" /> Help Center
                     </Link>
-                    <Link href="#" className="text-caption font-sans text-on-surface-variant font-semibold hover:text-primary transition-colors flex items-center gap-1">
+                    <Link href="#" className="text-caption font-sans text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
                         <Shield className="h-4 w-4" /> Privacy Policy
                     </Link>
-                    <Link href="#" className="text-caption font-sans text-on-surface-variant font-semibold hover:text-primary transition-colors flex items-center gap-1">
+                    <Link href="#" className="text-caption font-sans text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
                         <Activity className="h-4 w-4" /> System Status
                     </Link>
                 </div>

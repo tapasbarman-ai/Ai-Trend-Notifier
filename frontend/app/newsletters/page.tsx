@@ -87,14 +87,14 @@ export default function NewslettersPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-                            <span className="text-[11px] text-primary font-bold uppercase tracking-wider">
+                            <span className="text-caption font-caption text-primary uppercase">
                                 Archive Feed ({filtered.length} Editions)
                             </span>
                         </div>
-                        <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-on-background mb-4 uppercase">
+                        <h1 className="font-display text-display-xl text-on-background mb-4">
                             Edition Archive
                         </h1>
-                        <p className="font-sans text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                        <p className="font-sans text-body-lg text-on-surface-variant max-w-2xl">
                             Explore our curated collection of deep dives into generative efficiency, neural architectures, and the future of human-AI collaboration.
                         </p>
                     </div>
@@ -127,7 +127,7 @@ export default function NewslettersPage() {
                                     setSelectedTag(tag);
                                     setVisibleCount(6);
                                 }}
-                                className={`px-4 py-2 rounded-full font-sans text-label-bold font-semibold transition-all ${
+                                className={`px-4 py-2 rounded-full font-sans text-label-bold transition-all ${
                                     isActive
                                         ? 'bg-primary-container text-on-primary-container glow-accent'
                                         : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'
@@ -142,7 +142,7 @@ export default function NewslettersPage() {
 
             {/* Latest Editions Heading */}
             <div className="flex items-center gap-4 mb-8">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-on-background">Latest Editions</h2>
+                <h2 className="font-display text-headline-lg text-on-background">Latest Editions</h2>
                 <div className="h-[1px] flex-grow bg-outline-variant"></div>
             </div>
 
@@ -162,7 +162,7 @@ export default function NewslettersPage() {
 
             {filtered.length === 0 && (
                 <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-12 text-center max-w-md mx-auto mt-12">
-                    <p className="text-on-surface-variant font-medium">No editions found matching your filters.</p>
+                    <p className="text-on-surface-variant font-body-md">No editions found matching your filters.</p>
                 </div>
             )}
 
@@ -171,7 +171,7 @@ export default function NewslettersPage() {
                 <div className="flex justify-center mt-16">
                     <button
                         onClick={() => setVisibleCount((prev) => prev + 6)}
-                        className="group flex items-center gap-3 px-8 py-4 bg-surface-container-low border-2 border-primary text-primary font-sans text-label-bold font-bold rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all glow-accent active:scale-95"
+                        className="group flex items-center gap-3 px-8 py-4 bg-surface-container-low border-2 border-primary text-primary font-sans text-label-bold rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all glow-accent active:scale-95"
                     >
                         Load Previous Editions
                         <span className="transition-transform duration-300 group-hover:translate-y-1">↓</span>

@@ -32,6 +32,16 @@ const config: Config = {
                 sans: ['var(--font-inter)', 'sans-serif'],
                 display: ['var(--font-plus-jakarta)', 'sans-serif'],
             },
+            fontSize: {
+                'caption': ['12px', { lineHeight: '16px', fontWeight: '400' }],
+                'headline-md': ['24px', { lineHeight: '32px', fontWeight: '700' }],
+                'headline-lg-mobile': ['32px', { lineHeight: '40px', fontWeight: '700' }],
+                'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+                'label-bold': ['14px', { lineHeight: '20px', letterSpacing: '0.05em', fontWeight: '600' }],
+                'headline-lg': ['40px', { lineHeight: '48px', letterSpacing: '-0.01em', fontWeight: '700' }],
+                'display-xl': ['64px', { lineHeight: '72px', letterSpacing: '-0.02em', fontWeight: '800' }],
+                'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+            },
             spacing: {
                 'margin-desktop': '64px',
                 'margin-mobile': '20px',

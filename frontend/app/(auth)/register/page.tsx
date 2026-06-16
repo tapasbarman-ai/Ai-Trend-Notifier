@@ -43,10 +43,10 @@ export default function RegisterPage() {
                     <div className="p-8 md:p-12 space-y-8">
                         {/* Header */}
                         <div className="text-center">
-                            <h1 className="font-display text-3xl font-extrabold text-on-background mb-2">
+                            <h1 className="font-display text-headline-lg text-on-background mb-2">
                                 Create Admin Account
                             </h1>
-                            <p className="text-on-surface-variant font-sans text-body-md font-semibold opacity-85">
+                            <p className="text-on-surface-variant font-sans text-body-md opacity-85">
                                 Join the AI Insights management team.
                             </p>
                         </div>
@@ -55,7 +55,7 @@ export default function RegisterPage() {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {/* Full Name */}
                             <div className="group">
-                                <label className="block font-sans text-label-bold font-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-all">
+                                <label className="block font-sans text-label-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-all">
                                     Full Name
                                 </label>
                                 <div className="relative flex items-center border-b border-outline-variant py-3 focus-within:border-primary transition-all">
@@ -73,7 +73,7 @@ export default function RegisterPage() {
 
                             {/* Email Address */}
                             <div className="group">
-                                <label className="block font-sans text-label-bold font-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-all">
+                                <label className="block font-sans text-label-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-all">
                                     Email Address
                                 </label>
                                 <div className="relative flex items-center border-b border-outline-variant py-3 focus-within:border-primary transition-all">
@@ -92,7 +92,7 @@ export default function RegisterPage() {
 
                             {/* Password */}
                             <div className="group">
-                                <label className="block font-sans text-label-bold font-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-all">
+                                <label className="block font-sans text-label-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-all">
                                     Password
                                 </label>
                                 <div className="relative flex items-center border-b border-outline-variant py-3 focus-within:border-primary transition-all">
@@ -111,7 +111,7 @@ export default function RegisterPage() {
 
                             {/* Focus Radio Grid Selector */}
                             <div className="space-y-3">
-                                <label className="block font-sans text-label-bold font-bold text-on-surface-variant">
+                                <label className="block font-sans text-label-bold text-on-surface-variant">
                                     Primary Focus
                                 </label>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -127,7 +127,7 @@ export default function RegisterPage() {
                                         />
                                         <div className="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface-container-low transition-all hover:bg-surface-container-high peer-checked:border-primary peer-checked:bg-primary-container/10 peer-checked:shadow-sm text-center">
                                             <Database className="h-5 w-5 text-primary mb-2" />
-                                            <span className="font-sans text-label-bold font-bold text-on-surface text-xs">Analytics</span>
+                                            <span className="font-sans text-label-bold text-on-surface text-xs">Analytics</span>
                                         </div>
                                     </label>
                                     {/* Curation */}
@@ -142,7 +142,7 @@ export default function RegisterPage() {
                                         />
                                         <div className="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface-container-low transition-all hover:bg-surface-container-high peer-checked:border-primary peer-checked:bg-primary-container/10 peer-checked:shadow-sm text-center">
                                             <Sparkles className="h-5 w-5 text-primary mb-2" />
-                                            <span className="font-sans text-label-bold font-bold text-on-surface text-xs">Curation</span>
+                                            <span className="font-sans text-label-bold text-on-surface text-xs">Curation</span>
                                         </div>
                                     </label>
                                     {/* Strategy */}
@@ -157,14 +157,14 @@ export default function RegisterPage() {
                                         />
                                         <div className="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface-container-low transition-all hover:bg-surface-container-high peer-checked:border-primary peer-checked:bg-primary-container/10 peer-checked:shadow-sm text-center">
                                             <LayoutGrid className="h-5 w-5 text-primary mb-2" />
-                                            <span className="font-sans text-label-bold font-bold text-on-surface text-xs">Strategy</span>
+                                            <span className="font-sans text-label-bold text-on-surface text-xs">Strategy</span>
                                         </div>
                                     </label>
                                 </div>
                             </div>
 
                             {error && (
-                                <p className="text-rose-600 text-xs font-semibold bg-rose-50 border border-rose-100 rounded-lg p-2.5">
+                                <p className="text-rose-600 text-caption font-caption bg-rose-50 border border-rose-100 rounded-lg p-2.5">
                                     {error}
                                 </p>
                             )}
@@ -174,7 +174,7 @@ export default function RegisterPage() {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full bg-primary-container text-on-primary-container font-sans text-label-bold font-bold py-4 rounded-xl border-2 border-primary hover:shadow-lg hover:shadow-primary-container/20 transition-all duration-300 flex items-center justify-center gap-2 group active:scale-95 disabled:opacity-50"
+                                    className="w-full bg-primary-container text-on-primary-container font-sans text-label-bold py-4 rounded-xl border-2 border-primary hover:shadow-lg hover:shadow-primary-container/20 transition-all duration-300 flex items-center justify-center gap-2 group active:scale-95 disabled:opacity-50"
                                 >
                                     {loading ? 'Creating account...' : 'Create Account'}
                                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -184,9 +184,9 @@ export default function RegisterPage() {
 
                         {/* Footer Link */}
                         <div className="mt-8 text-center pt-4 border-t border-outline-variant/30">
-                            <p className="font-sans text-caption font-semibold text-on-surface-variant">
+                            <p className="font-sans text-caption text-on-surface-variant">
                                 Already have an admin account?{' '}
-                                <Link className="text-primary font-sans text-label-bold font-bold hover:underline" href="/login">
+                                <Link className="text-primary font-sans text-label-bold hover:underline" href="/login">
                                     Log in instead
                                 </Link>
                             </p>
@@ -200,19 +200,19 @@ export default function RegisterPage() {
                 <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 opacity-70">
                     <div className="flex items-center gap-2 justify-center text-on-surface-variant">
                         <ShieldCheck className="h-4 w-4" />
-                        <span className="font-sans text-caption font-bold">Secure SSO</span>
+                        <span className="font-sans text-caption">Secure SSO</span>
                     </div>
                     <div className="flex items-center gap-2 justify-center text-on-surface-variant">
                         <Lock className="h-4 w-4" />
-                        <span className="font-sans text-caption font-bold">256-bit AES</span>
+                        <span className="font-sans text-caption">256-bit AES</span>
                     </div>
                     <div className="flex items-center gap-2 justify-center text-on-surface-variant">
                         <Cloud className="h-4 w-4" />
-                        <span className="font-sans text-caption font-bold">Cloud Sync</span>
+                        <span className="font-sans text-caption">Cloud Sync</span>
                     </div>
                     <div className="flex items-center gap-2 justify-center text-on-surface-variant">
                         <History className="h-4 w-4" />
-                        <span className="font-sans text-caption font-bold">Audit Ready</span>
+                        <span className="font-sans text-caption">Audit Ready</span>
                     </div>
                 </div>
             </div>

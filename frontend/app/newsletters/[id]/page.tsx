@@ -82,11 +82,11 @@ export default function NewsletterDetailPage() {
         try {
             const rawSources = parts[1].trim();
 
-            // 1. Try standard JSON parse first
+            // Try standard JSON parse first
             try {
                 sources = JSON.parse(rawSources);
             } catch (jsonError) {
-                // 2. If JSON fails, fall back to regex python parsing
+                // If JSON fails, fall back to regex python parsing
                 const objectRegex = /\{[^{}]+\}/g;
                 let objectMatch;
 
@@ -137,13 +137,13 @@ export default function NewsletterDetailPage() {
         <main className="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12 text-on-background">
             <button
                 onClick={() => router.push('/newsletters')}
-                className="flex items-center gap-2 text-on-surface-variant hover:text-primary mb-8 transition-colors group text-sm font-semibold"
+                className="flex items-center gap-2 text-on-surface-variant hover:text-primary mb-8 transition-colors group text-label-bold"
             >
                 <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
                 Back to Newsletters
             </button>
 
-            {/* Split layout: 2 cols for article (8 cols span), 1 col for sources sidebar (4 cols span) */}
+            {/* Split layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
                 
                 {/* Main Content Area */}
@@ -152,22 +152,22 @@ export default function NewsletterDetailPage() {
                     {/* Header Section */}
                     <header className="space-y-6">
                         <div className="flex items-center gap-3">
-                            <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-sans text-label-bold font-bold text-xs">
+                            <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-sans text-caption font-bold">
                                 VOL. {newsletter.id} • AI PULSE
                             </span>
-                            <span className="text-on-surface-variant font-sans text-caption font-semibold">
+                            <span className="text-on-surface-variant font-sans text-caption">
                                 {date.toUpperCase()}
                             </span>
                         </div>
-                        <h1 className="font-display text-3xl md:text-5xl font-extrabold leading-tight text-on-background">
+                        <h1 className="font-display text-display-xl text-on-background">
                             {newsletter.title}
                         </h1>
                         <div className="flex items-center gap-4 py-4 border-y border-outline-variant">
-                            <div className="w-12 h-12 rounded-full bg-primary-container/30 flex items-center justify-center font-display font-bold text-primary text-lg border border-primary-container">
+                            <div className="w-12 h-12 rounded-full bg-primary-container/30 flex items-center justify-center font-display font-bold text-primary text-headline-md border border-primary-container">
                                 AI
                             </div>
                             <div>
-                                <p className="font-sans text-label-bold font-bold text-on-background">Agent System</p>
+                                <p className="font-sans text-label-bold text-on-background">Agent System</p>
                                 <p className="font-sans text-caption text-on-surface-variant">Automated Ingestion & Enrichment Pipeline</p>
                             </div>
                             <div className="ml-auto flex gap-2">
@@ -188,7 +188,7 @@ export default function NewsletterDetailPage() {
                         </div>
                         <div className="flex items-center gap-2 mb-4">
                             <span className="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-                            <h2 className="font-sans text-label-bold font-bold uppercase tracking-widest text-primary">
+                            <h2 className="font-sans text-label-bold uppercase text-primary">
                                 Executive AI Summary
                             </h2>
                         </div>
@@ -205,12 +205,12 @@ export default function NewsletterDetailPage() {
                     {/* Footer Action Card */}
                     <div className="bg-inverse-surface text-inverse-on-surface rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div className="space-y-2 text-center md:text-left">
-                            <h3 className="font-display text-xl md:text-2xl font-bold">Enjoying these insights?</h3>
+                            <h3 className="font-display text-headline-md">Enjoying these insights?</h3>
                             <p className="font-sans text-body-md text-surface-variant">Get the deep-dives delivered to your inbox every Thursday.</p>
                         </div>
                         <Link 
                             href="/#subscribe" 
-                            className="bg-primary-container text-on-primary-container font-sans text-label-bold font-bold px-8 py-4 rounded-full hover:bg-primary-fixed transition-all active:scale-95 whitespace-nowrap shadow-lg glow-yellow"
+                            className="bg-primary-container text-on-primary-container font-sans text-label-bold px-8 py-4 rounded-full hover:bg-primary-fixed transition-all active:scale-95 whitespace-nowrap shadow-lg glow-yellow"
                         >
                             Subscribe to Newsletter
                         </Link>
@@ -224,10 +224,10 @@ export default function NewsletterDetailPage() {
                         {/* Reference Feed */}
                         <div className="space-y-6">
                             <div className="flex items-center justify-between">
-                                <h3 className="font-sans text-label-bold font-bold uppercase tracking-widest text-on-surface-variant">
+                                <h3 className="font-sans text-label-bold uppercase text-on-surface-variant">
                                     Reference Feed
                                 </h3>
-                                <span className="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-bold text-on-surface-variant animate-pulse">
+                                <span className="bg-surface-container-high px-2 py-0.5 rounded text-caption font-caption font-semibold text-on-surface-variant animate-pulse">
                                     LIVE UPDATES
                                 </span>
                             </div>
@@ -248,30 +248,30 @@ export default function NewsletterDetailPage() {
                                                     {type === 'twitter' && (
                                                         <>
                                                             <Twitter className="h-5 w-5 text-[#1DA1F2]" />
-                                                            <span className="font-sans text-label-bold font-bold text-on-surface">Twitter / X</span>
+                                                            <span className="font-sans text-label-bold text-on-surface">Twitter / X</span>
                                                         </>
                                                     )}
                                                     {type === 'reddit' && (
                                                         <>
                                                             <MessageSquare className="h-5 w-5 text-[#FF4500]" />
-                                                            <span className="font-sans text-label-bold font-bold text-on-surface">Reddit Community</span>
+                                                            <span className="font-sans text-label-bold text-on-surface">Reddit Community</span>
                                                         </>
                                                     )}
                                                     {type === 'news' && (
                                                         <>
                                                             <Globe className="h-5 w-5 text-primary" />
-                                                            <span className="font-sans text-label-bold font-bold text-on-surface">News Analysis</span>
+                                                            <span className="font-sans text-label-bold text-on-surface">News Analysis</span>
                                                         </>
                                                     )}
-                                                    <span className="ml-auto text-caption font-semibold text-on-surface-variant flex items-center gap-0.5">
+                                                    <span className="ml-auto text-caption font-caption text-on-surface-variant flex items-center gap-0.5">
                                                         <Clock className="h-3 w-3" />
                                                         Verified
                                                     </span>
                                                 </div>
-                                                <p className="font-sans text-caption text-on-surface-variant mb-3 leading-relaxed">
+                                                <p className="font-sans text-caption text-on-surface-variant mb-3">
                                                     {source.snippet || source.title}
                                                 </p>
-                                                <div className="flex items-center gap-2 text-primary font-sans text-label-bold font-bold text-xs">
+                                                <div className="flex items-center gap-2 text-primary font-sans text-label-bold text-xs">
                                                     <span>
                                                         {type === 'twitter' ? 'View Thread' : type === 'reddit' ? 'Join Discussion' : 'Read Full Report'}
                                                     </span>
@@ -283,27 +283,27 @@ export default function NewsletterDetailPage() {
                                 </div>
                             ) : (
                                 <div className="bg-surface-container-low border border-outline-variant rounded-xl p-6 text-center">
-                                    <p className="font-sans text-xs text-on-surface-variant font-medium">
+                                    <p className="font-sans text-caption text-on-surface-variant">
                                         No references attached to this edition.
                                     </p>
                                 </div>
                             )}
                         </div>
 
-                        {/* Trending Topics (Bento Style) */}
+                        {/* Trending Topics */}
                         <div className="bg-surface-container rounded-2xl p-6 space-y-4">
-                            <h3 className="font-sans text-label-bold font-bold text-on-surface">Trending in AI</h3>
+                            <h3 className="font-sans text-label-bold text-on-surface">Trending in AI</h3>
                             <div className="flex flex-wrap gap-2">
-                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-xs font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
+                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-caption font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
                                     #AgentSwarm
                                 </span>
-                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-xs font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
+                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-caption font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
                                     #TokenEconomics
                                 </span>
-                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-xs font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
+                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-caption font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
                                     #RAG2.0
                                 </span>
-                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-xs font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
+                                <span className="bg-white dark:bg-black border border-outline-variant px-3 py-1 rounded-full text-caption font-semibold hover:border-primary cursor-pointer transition-colors text-on-surface">
                                     #GenerativeAI
                                 </span>
                             </div>
@@ -311,13 +311,13 @@ export default function NewsletterDetailPage() {
 
                         {/* Newsletter Stats Summary Box */}
                         <div className="left-accent-bar bg-surface-container-high p-6 rounded-xl border border-outline-variant">
-                            <h4 className="font-sans text-caption font-bold text-on-surface-variant uppercase mb-1">
+                            <h4 className="font-sans text-caption text-on-surface-variant uppercase mb-1">
                                 Edition Impact
                             </h4>
-                            <div className={`font-display text-2xl font-bold ${sentimentColor}`}>
+                            <div className={`font-display text-headline-md ${sentimentColor}`}>
                                 {sentimentScore}
                             </div>
-                            <p className="font-sans text-caption text-on-surface-variant flex items-center gap-1 mt-1 font-medium">
+                            <p className="font-sans text-caption text-on-surface-variant flex items-center gap-1 mt-1">
                                 <TrendingUp className="h-3 w-3" />
                                 Reader Sentiment ({newsletter.sentiment})
                             </p>

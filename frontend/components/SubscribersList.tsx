@@ -73,8 +73,8 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
             {/* Header section */}
             <div className="p-6 border-b border-outline-variant flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h3 className="font-display text-2xl font-bold">Subscriber List</h3>
-                    <p className="font-sans text-caption text-on-surface-variant mt-1 font-semibold">
+                    <h3 className="font-display text-headline-md">Subscriber List</h3>
+                    <p className="font-sans text-caption text-on-surface-variant mt-1">
                         Total Registered: {subscribers.length}
                     </p>
                 </div>
@@ -90,7 +90,7 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
                             setSearchTerm(e.target.value);
                             setCurrentPage(1);
                         }}
-                        className="w-full bg-surface-container-lowest border border-outline-variant rounded-full text-caption py-2 pl-9 pr-4 focus:outline-none focus:border-primary transition-all font-medium placeholder:text-on-surface-variant/40"
+                        className="w-full bg-surface-container-lowest border border-outline-variant rounded-full text-caption py-2 pl-9 pr-4 focus:outline-none focus:border-primary transition-all placeholder:text-on-surface-variant/40"
                     />
                 </div>
             </div>
@@ -103,7 +103,7 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
                     </div>
                 ) : (
                     <table className="w-full text-left">
-                        <thead className="bg-surface-container-high border-b border-outline-variant font-sans text-label-bold font-bold text-on-surface-variant">
+                        <thead className="bg-surface-container-high border-b border-outline-variant font-sans text-label-bold text-on-surface-variant">
                             <tr>
                                 <th className="px-6 py-4">User Details</th>
                                 <th className="px-6 py-4">Join Date</th>
@@ -125,24 +125,24 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
                                     <tr key={sub.id} className="hover:bg-surface-container transition-colors group">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-sans text-label-bold font-bold text-xs shadow-sm">
+                                                <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-sans text-label-bold text-xs shadow-sm">
                                                     {initials}
                                                 </div>
                                                 <div className="truncate max-w-[200px]">
-                                                    <p className="font-sans text-label-bold font-bold text-on-background leading-none mb-1">
+                                                    <p className="font-sans text-label-bold text-on-background leading-none mb-1">
                                                         {sub.email.split('@')[0]}
                                                     </p>
-                                                    <p className="font-sans text-caption text-on-surface-variant font-medium">
+                                                    <p className="font-sans text-caption text-on-surface-variant">
                                                         {sub.email}
                                                     </p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 font-sans text-body-md font-semibold text-on-surface-variant">
+                                        <td className="px-6 py-4 font-sans text-body-md text-on-surface-variant">
                                             {joinDate}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full ${
+                                            <span className={`px-2.5 py-1 text-caption font-caption font-semibold uppercase tracking-wider rounded-full ${
                                                 source === 'LinkedIn' ? 'bg-[#0077B5]/10 text-[#0077B5]' :
                                                 source === 'Twitter' ? 'bg-[#1DA1F2]/10 text-[#1DA1F2]' :
                                                 source === 'Google' ? 'bg-[#DB4437]/10 text-[#DB4437]' :
@@ -153,9 +153,9 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-center">
-                                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
+                                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-caption font-caption font-semibold ${
                                                 sub.is_active 
-                                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
+                                                    ? 'bg-emerald-55 text-emerald-700 border border-emerald-200' 
                                                     : 'bg-rose-50 text-rose-700 border border-rose-200'
                                             }`}>
                                                 <span className={`w-1.5 h-1.5 rounded-full ${sub.is_active ? 'bg-emerald-500' : 'bg-rose-500'}`}></span>
@@ -168,7 +168,7 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
 
                             {displayedItems.length === 0 && (
                                 <tr>
-                                    <td colSpan={4} className="text-center py-12 text-on-surface-variant font-medium">
+                                    <td colSpan={4} className="text-center py-12 text-on-surface-variant font-body-md">
                                         No subscribers found.
                                     </td>
                                 </tr>
@@ -181,7 +181,7 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
             {/* Pagination / Table Footer */}
             {!loading && totalItems > 0 && (
                 <div className="mt-auto p-4 flex justify-between items-center border-t border-outline-variant bg-surface-container-low">
-                    <p className="font-sans text-caption font-semibold text-on-surface-variant">
+                    <p className="font-sans text-caption text-on-surface-variant">
                         Showing {Math.min(totalItems, (currentPage - 1) * itemsPerPage + 1)} to {Math.min(totalItems, currentPage * itemsPerPage)} of {totalItems} subscribers
                     </p>
                     
@@ -189,14 +189,14 @@ export default function SubscribersList({ onListUpdated }: SubscribersListProps)
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1}
-                            className="p-2 hover:bg-surface-container-high rounded-lg transition-colors text-on-surface-variant disabled:opacity-40"
+                            className="p-2 hover:bg-surface-container-high rounded-lg transition-colors text-label-bold text-on-surface-variant disabled:opacity-40"
                         >
                             ← Previous
                         </button>
                         <button
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages || totalPages === 0}
-                            className="p-2 hover:bg-surface-container-high rounded-lg transition-colors text-on-surface-variant disabled:opacity-40"
+                            className="p-2 hover:bg-surface-container-high rounded-lg transition-colors text-label-bold text-on-surface-variant disabled:opacity-40"
                         >
                             Next →
                         </button>

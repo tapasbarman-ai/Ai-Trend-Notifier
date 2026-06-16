@@ -54,14 +54,14 @@ export default function AdminPage() {
             {/* Top App Bar / Dashboard Header */}
             <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 pb-6 border-b border-outline-variant">
                 <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-primary font-sans text-label-bold font-bold uppercase tracking-wider text-xs">
+                    <div className="flex items-center gap-2 text-primary font-sans text-caption uppercase">
                         <LayoutDashboard className="h-4 w-4" />
                         Admin Panel
                     </div>
-                    <h1 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-on-background uppercase">
+                    <h1 className="font-display text-headline-lg text-on-background uppercase">
                         Dashboard Overview
                     </h1>
-                    <p className="text-on-surface-variant font-sans text-body-md font-medium">
+                    <p className="text-on-surface-variant font-sans text-body-md">
                         Welcome back, Administrator. Here is your platform status today.
                     </p>
                 </div>
@@ -71,7 +71,7 @@ export default function AdminPage() {
                     
                     <button
                         onClick={handleLogout}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 rounded-xl text-sm font-bold hover:bg-red-100 transition-all active:scale-95"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 rounded-xl text-label-bold hover:bg-red-100 transition-all active:scale-95"
                     >
                         <LogOut className="h-4 w-4" />
                         Logout
@@ -85,19 +85,19 @@ export default function AdminPage() {
                 <div className="bg-surface-container-low border border-outline-variant rounded-xl p-6 relative overflow-hidden group">
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
                     <div className="flex justify-between items-start mb-4">
-                        <span className="text-on-surface-variant font-sans text-label-bold font-bold uppercase tracking-wider text-xs">
+                        <span className="text-on-surface-variant font-sans text-caption uppercase">
                             Total Reach
                         </span>
                         <Users className="h-5 w-5 text-primary" />
                     </div>
-                    <div className="font-display text-3xl font-extrabold mb-1">
+                    <div className="font-display text-headline-md mb-1">
                         {loadingStats ? (
-                            <Loader2 className="h-8 w-8 animate-spin text-primary-container" />
+                            <Loader2 className="h-6 w-6 animate-spin text-primary-container" />
                         ) : (
                             stats.subscribers
                         )}
                     </div>
-                    <div className="font-sans text-caption text-primary font-semibold flex items-center gap-1">
+                    <div className="font-sans text-caption text-primary flex items-center gap-1">
                         <span>Active newsletter subscribers</span>
                     </div>
                 </div>
@@ -106,19 +106,19 @@ export default function AdminPage() {
                 <div className="bg-surface-container-low border border-outline-variant rounded-xl p-6 relative overflow-hidden group">
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
                     <div className="flex justify-between items-start mb-4">
-                        <span className="text-on-surface-variant font-sans text-label-bold font-bold uppercase tracking-wider text-xs">
+                        <span className="text-on-surface-variant font-sans text-caption uppercase">
                             Sent Campaigns
                         </span>
                         <FileText className="h-5 w-5 text-primary" />
                     </div>
-                    <div className="font-display text-3xl font-extrabold mb-1">
+                    <div className="font-display text-headline-md mb-1">
                         {loadingStats ? (
-                            <Loader2 className="h-8 w-8 animate-spin text-primary-container" />
+                            <Loader2 className="h-6 w-6 animate-spin text-primary-container" />
                         ) : (
                             stats.newsletters
                         )}
                     </div>
-                    <div className="font-sans text-caption text-primary font-semibold flex items-center gap-1">
+                    <div className="font-sans text-caption text-primary flex items-center gap-1">
                         <span>Published newsletter editions</span>
                     </div>
                 </div>
@@ -127,15 +127,15 @@ export default function AdminPage() {
                 <div className="bg-surface-container-low border border-outline-variant rounded-xl p-6 relative overflow-hidden">
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
                     <div className="flex justify-between items-start mb-4">
-                        <span className="text-on-surface-variant font-sans text-label-bold font-bold uppercase tracking-wider text-xs">
+                        <span className="text-on-surface-variant font-sans text-caption uppercase">
                             System Status
                         </span>
                         <Activity className="h-5 w-5 text-primary" />
                     </div>
-                    <div className="font-display text-3xl font-extrabold mb-1 text-emerald-600 flex items-center gap-2">
+                    <div className="font-display text-headline-md mb-1 text-emerald-600 flex items-center gap-2">
                         Online
                     </div>
-                    <div className="font-sans text-caption text-on-surface-variant font-medium flex items-center gap-2">
+                    <div className="font-sans text-caption text-on-surface-variant flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                         <span>Ingestion pipeline operational</span>
                     </div>

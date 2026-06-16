@@ -37,13 +37,13 @@ export default function CreateNewsletterForm({ onNewsletterCreated }: CreateNews
         <div className="bg-surface-container-lowest border-2 border-primary-container p-8 rounded-2xl shadow-[0_10px_30px_rgba(255,215,0,0.1)] h-fit text-on-background">
             <div className="flex items-center gap-3 mb-6">
                 <Mail className="text-primary h-8 w-8" />
-                <h3 className="font-display text-2xl font-bold uppercase tracking-tight">Create Newsletter</h3>
+                <h3 className="font-display text-headline-md">Create Newsletter</h3>
             </div>
             
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Title Input */}
                 <div className="group">
-                    <label className="block font-sans text-label-bold font-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
+                    <label className="block font-sans text-label-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
                         Subject Line
                     </label>
                     <input
@@ -59,7 +59,7 @@ export default function CreateNewsletterForm({ onNewsletterCreated }: CreateNews
 
                 {/* Sentiment Dropdown */}
                 <div className="group">
-                    <label className="block font-sans text-label-bold font-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
+                    <label className="block font-sans text-label-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
                         Market Sentiment
                     </label>
                     <select
@@ -76,7 +76,7 @@ export default function CreateNewsletterForm({ onNewsletterCreated }: CreateNews
 
                 {/* Summary Textarea */}
                 <div className="group">
-                    <label className="block font-sans text-label-bold font-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
+                    <label className="block font-sans text-label-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
                         Executive Summary
                     </label>
                     <textarea
@@ -91,7 +91,7 @@ export default function CreateNewsletterForm({ onNewsletterCreated }: CreateNews
 
                 {/* Content Textarea */}
                 <div className="group">
-                    <label className="block font-sans text-label-bold font-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
+                    <label className="block font-sans text-label-bold text-on-surface-variant mb-1 group-focus-within:text-primary transition-colors">
                         Edition Content
                     </label>
                     <textarea
@@ -106,13 +106,13 @@ export default function CreateNewsletterForm({ onNewsletterCreated }: CreateNews
 
                 {/* Status messages */}
                 {status === 'success' && (
-                    <div className="flex items-center gap-2 text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-sm font-semibold">
+                    <div className="flex items-center gap-2 text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-caption font-caption font-semibold">
                         <CheckCircle2 className="h-4 w-4" />
                         <span>Newsletter created and published successfully!</span>
                     </div>
                 )}
                 {status === 'error' && (
-                    <div className="flex items-center gap-2 text-rose-600 bg-rose-50 border border-rose-200 rounded-xl p-3 text-sm font-semibold">
+                    <div className="flex items-center gap-2 text-rose-600 bg-rose-50 border border-rose-200 rounded-xl p-3 text-caption font-caption font-semibold">
                         <AlertCircle className="h-4 w-4" />
                         <span>Failed to send newsletter campaign. Please retry.</span>
                     </div>
@@ -122,7 +122,7 @@ export default function CreateNewsletterForm({ onNewsletterCreated }: CreateNews
                 <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full py-4 bg-primary text-on-primary rounded-xl font-sans text-label-bold font-bold border-2 border-primary hover:bg-transparent hover:text-primary transition-all active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-4 bg-primary text-on-primary rounded-xl font-sans text-label-bold border-2 border-primary hover:bg-transparent hover:text-primary transition-all active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                     {status === 'loading' ? (
                         <>

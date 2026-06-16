@@ -16,7 +16,7 @@ export default function NewsletterCard({ id, title, summary, sentiment, publishe
     });
 
     return (
-        <article className="group bg-surface-container-lowest border border-outline-variant rounded-2xl overflow-hidden hover:-translate-y-2 hover:border-primary hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full">
+        <article className="group bg-surface-container-lowest border border-outline-variant rounded-2xl overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full">
             <div>
                 {/* Illustrative Pattern Card Header */}
                 <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-surface-container-low via-surface-container to-surface-container-highest flex items-center justify-center border-b border-outline-variant p-6">
@@ -28,8 +28,8 @@ export default function NewsletterCard({ id, title, summary, sentiment, publishe
                     </div>
                     
                     <div className="absolute top-4 left-4">
-                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold shadow-sm ${
-                            sentiment === 'Positive' ? 'sentiment-gradient-positive text-on-primary-container' :
+                        <span className={`px-3 py-1 rounded-full text-caption font-caption shadow-sm ${
+                            sentiment === 'Positive' ? 'sentiment-gradient-positive text-on-primary-fixed' :
                             sentiment === 'Negative' ? 'bg-error-container text-on-error-container border border-error/20' :
                             'bg-surface-container-highest text-on-surface-variant border border-outline-variant'
                         }`}>
@@ -39,13 +39,13 @@ export default function NewsletterCard({ id, title, summary, sentiment, publishe
                 </div>
 
                 <div className="p-6 pb-0">
-                    <p className="font-sans text-xs font-semibold text-on-surface-variant mb-2">{date}</p>
-                    <h3 className="font-display text-lg font-bold text-on-background mb-4 group-hover:text-primary transition-colors leading-snug">
+                    <p className="font-caption text-caption text-on-surface-variant mb-2">{date}</p>
+                    <h3 className="font-headline-md text-headline-md text-on-background mb-4 group-hover:text-primary transition-colors leading-snug">
                         {title}
                     </h3>
                     
                     <div className="summary-accent p-4 mb-6 rounded-r-lg">
-                        <p className="font-sans text-xs italic text-on-background leading-relaxed line-clamp-3">
+                        <p className="font-body-md text-body-md italic text-on-surface line-clamp-3">
                             "{summary}"
                         </p>
                     </div>
@@ -53,13 +53,11 @@ export default function NewsletterCard({ id, title, summary, sentiment, publishe
             </div>
 
             <div className="px-6 pb-6">
-                <Link href={`/newsletters/${id}`} className="flex items-center gap-1.5 font-sans text-label-bold font-bold text-primary group/link hover:opacity-80 transition-all text-sm w-fit">
+                <Link href={`/newsletters/${id}`} className="flex items-center gap-2 font-label-bold text-label-bold text-primary group/link hover:opacity-80 transition-all w-fit">
                     Read Full Edition 
                     <span className="transition-transform duration-300 group-hover/link:translate-x-1">→</span>
                 </Link>
             </div>
         </article>
-
-
     );
 }
