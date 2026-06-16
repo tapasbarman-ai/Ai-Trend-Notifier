@@ -118,61 +118,91 @@ export default function NewsletterDetailPage() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 py-12">
             <button
                 onClick={() => router.push('/newsletters')}
-                className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-accent mb-8"
+                className="flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors group text-sm font-medium"
             >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
                 Back to Newsletters
             </button>
 
-            <article className="prose prose-lg dark:prose-invert max-w-none mb-12">
-                <div className="flex items-center gap-4 mb-4">
-                    <span className="text-sm text-gray-500">{date}</span>
-                    <span className={`text-xs font-medium px-3 py-1 rounded-full ${newsletter.sentiment === 'Positive' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
-                        newsletter.sentiment === 'Negative' ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' :
-                            'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                        }`}>
-                        {newsletter.sentiment}
-                    </span>
+            {/* Split layout: 2 cols for article, 1 col for sources sidebar */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div className="lg:col-span-2 space-y-8">
+                    <article className="space-y-6">
+                        <div className="flex items-center gap-4 text-xs font-semibold">
+                            <span className="text-gray-500">{date}</span>
+                            <span className={`px-3 py-1 rounded-full uppercase tracking-wider ${
+                                newsletter.sentiment === 'Positive' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
+                                newsletter.sentiment === 'Negative' ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' :
+                                'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
+                            }`}>
+                                {newsletter.sentiment} Sentiment
+                            </span>
+                        </div>
+
+                        <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            {newsletter.title}
+                        </h1>
+
+                        {/* Glowing Summarizer Box */}
+                        <div className="relative group p-6 rounded-2xl bg-primary/5 border border-primary/20 shadow-[0_0_30px_rgba(99,102,241,0.02)]">
+                            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-accent rounded-l-2xl"></div>
+                            <h3 className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Executive AI Summary</h3>
+                            <p className="text-gray-300 font-medium text-base md:text-lg leading-relaxed">
+                                {newsletter.summary}
+                            </p>
+                        </div>
+
+                        {/* Main Body */}
+                        <div className="whitespace-pre-wrap text-gray-300 leading-relaxed text-base md:text-lg pt-4">
+                            {mainContent}
+                        </div>
+                    </article>
                 </div>
 
-                <h1 className="text-4xl font-bold mb-6">{newsletter.title}</h1>
-
-                <div className="bg-gray-50 dark:bg-gray-900 border-l-4 border-accent p-6 mb-8 rounded-r-lg">
-                    <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
-                        {newsletter.summary}
-                    </p>
-                </div>
-
-                <div className="whitespace-pre-wrap text-gray-800 dark:text-gray-200">
-                    {mainContent}
-                </div>
-            </article>
-
-            {sources.length > 0 && (
-                <div className="border-t pt-8 mt-8">
-                    <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Sources & Related Reading</h2>
-                    <div className="grid gap-4 md:grid-cols-2">
-                        {sources.map((source, index) => (
-                            <a
-                                key={index}
-                                href={source.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-accent dark:hover:border-accent transition-colors bg-white dark:bg-gray-800"
-                            >
-                                <h3 className="font-semibold text-lg mb-2 text-gray-900 dark:text-white line-clamp-2">{source.title}</h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 mb-3">{source.snippet}</p>
-                                <span className="text-xs text-accent font-medium flex items-center">
-                                    Read source →
-                                </span>
-                            </a>
-                        ))}
+                {/* Sidebar Sources Column */}
+                <div className="space-y-6 lg:border-l lg:border-white/5 lg:pl-10">
+                    <div className="sticky top-28 space-y-6">
+                        <div>
+                            <h2 className="text-xl font-bold text-white mb-2">References & Reading</h2>
+                            <p className="text-xs text-gray-400 leading-relaxed">
+                                Curated web sources, discussion threads, and news records enriched automatically by our web agents.
+                            </p>
+                        </div>
+                        
+                        {sources.length > 0 ? (
+                            <div className="space-y-4">
+                                {sources.map((source, index) => (
+                                    <a
+                                        key={index}
+                                        href={source.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block p-4 rounded-xl glass-card border border-white/5 hover:border-primary/20 transition-all duration-300"
+                                    >
+                                        <h3 className="font-bold text-sm text-white line-clamp-2 mb-1 group-hover:text-primary transition-colors">
+                                            {source.title}
+                                        </h3>
+                                        <p className="text-xs text-gray-400 line-clamp-3 mb-3 leading-relaxed">
+                                            {source.snippet}
+                                        </p>
+                                        <span className="text-[11px] text-primary group-hover:text-white font-semibold flex items-center gap-1 transition-colors">
+                                            Explore source →
+                                        </span>
+                                    </a>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="p-6 rounded-xl border border-white/5 text-center">
+                                <p className="text-xs text-gray-500 font-medium">No verified source links attached to this edition.</p>
+                            </div>
+                        )}
                     </div>
                 </div>
-            )}
+            </div>
         </div>
+
     );
 }
