@@ -24,30 +24,31 @@ export default function SubscribeForm() {
     };
 
     return (
-        <div className="w-full max-w-md mx-auto" id="subscribe">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:flex-row">
+        <div className="w-full max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row p-1.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md">
                 <input
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="Enter your email address..."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black focus:outline-none focus:ring-2 focus:ring-accent"
+                    className="flex-1 px-4 py-3 rounded-lg bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm transition-all"
                     disabled={status === 'loading' || status === 'success'}
                 />
                 <button
                     type="submit"
                     disabled={status === 'loading' || status === 'success'}
-                    className="px-6 py-3 bg-primary text-white dark:bg-white dark:text-black rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center"
+                    className="px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg text-sm font-semibold hover:brightness-110 active:scale-95 transition-all shadow-md shadow-primary/10 disabled:opacity-50 flex items-center justify-center min-w-[110px]"
                 >
-                    {status === 'loading' ? <Loader2 className="animate-spin h-5 w-5" /> : 'Subscribe'}
+                    {status === 'loading' ? <Loader2 className="animate-spin h-4 w-4" /> : 'Subscribe'}
                 </button>
             </form>
             {message && (
-                <p className={`mt-4 text-sm text-center ${status === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                <p className={`mt-3 text-xs text-center font-medium ${status === 'success' ? 'text-green-400' : 'text-rose-400'}`}>
                     {message}
                 </p>
             )}
         </div>
+
     );
 }
