@@ -276,6 +276,7 @@ RECIPIENT_EMAIL=recipient@example.com
 
 # Database
 DB_PATH=data/db/trends.db
+DATABASE_URL=postgresql://postgres.yourprojectid:yourpassword@aws-0-us-east-1.pooler.supabase.com:5432/postgres
 ```
 
 ### 🔑 Getting API Keys
@@ -287,6 +288,8 @@ DB_PATH=data/db/trends.db
 | **Tavily API** | [tavily.com](https://tavily.com/) | ✅ 1,000 searches/month |
 | **Groq API** | [console.groq.com](https://console.groq.com/) | ✅ Yes |
 | **Gmail App Password** | [Google Account](https://myaccount.google.com/apppasswords) | ✅ Free |
+| **Supabase DB** | [supabase.com](https://supabase.com/) | ✅ Free Tier (2 projects) |
+
 
 ---
 
