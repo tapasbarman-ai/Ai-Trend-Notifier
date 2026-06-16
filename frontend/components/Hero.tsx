@@ -37,16 +37,12 @@ export default function Hero() {
                 
                 {/* Visual Accent Container on Right */}
                 <div className="relative">
-                    <div className="relative z-10 rounded-3xl overflow-hidden border-2 border-primary-container glow-yellow aspect-[4/3] bg-surface-container-low flex items-center justify-center p-8">
-                        <div className="text-center space-y-4">
-                            <div className="w-16 h-16 rounded-2xl bg-primary-container/30 text-primary flex items-center justify-center mx-auto shadow-md">
-                                <span className="text-headline-md font-display">AI</span>
-                            </div>
-                            <h3 className="font-display text-headline-md text-on-background">Autonomous Agent Monitoring</h3>
-                            <p className="font-sans text-body-md text-on-surface-variant max-w-sm">
-                                Live updates tracking sentiment swings, keyword spikes, and enriched references parsed across r/MachineLearning and Twitter.
-                            </p>
-                        </div>
+                    <div className="relative z-10 rounded-3xl overflow-hidden border-2 border-primary-container glow-yellow aspect-[4/3] bg-surface-container-low">
+                        <img 
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0sbtTDck6X1ioI6XyNEvIUwodXi3L6iXxNXsqqjJhuCsFiREnas_KH7VGGWGbBvZKTsvkReiITXRIiPuKhl96iWVaKzxNf_jQQabFQ8DYULB56IMJAtRyZHv8ZwetEfalJrgxBOkXRBn9xt_VV1hrcMLoT7RpKfH0gLlt2qrRi3vcHTw55aivEyXijYVBbmedc62PAvLRKCacRefjpNHH2IvbgfHYrGzP49Qlw8eSZW-DWodB5lDUc0rfn121dPHwe6PMLqREFqw" 
+                            alt="AI Insights Signature Illustration" 
+                            className="w-full h-full object-cover"
+                        />
                     </div>
                     {/* Decorative radial glows */}
                     <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-container/20 rounded-full blur-3xl"></div>

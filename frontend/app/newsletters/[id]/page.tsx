@@ -197,6 +197,18 @@ export default function NewsletterDetailPage() {
                         </p>
                     </section>
 
+                    {/* Conceptual routing illustration */}
+                    <div className="my-10 bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant group">
+                        <img 
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvMarKSpRG9lCWlvHcxJO2bTKcC9pSjbOnunLVxCN3VTTx3cDlLSxhClr0on3F-W75QJ0X5ykdVJmBJKq_cng9LrO84vSRnjGV7FLfDNXjX71rAKpOMESTdrH3A1ETEpKol5c0FhLz5HqwRdzhZNkXqML1l7ejhMJZc0_ojwNnQaGsKbSrKtzmHP2w_d441hwbvOYyWcTiZ7zhjCWWmmDmLmTEztudA9dMNiem-rC1fkcIa7qyqcp0DQPccnazXCGeL1_oxHb_4JY" 
+                            alt="Multi-agent neural routing pathways illustration" 
+                            className="w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="p-4 text-center italic font-sans text-caption text-on-surface-variant font-semibold">
+                            Fig 1.1: Visualization of multi-agent neural routing paths in a production environment.
+                        </div>
+                    </div>
+
                     {/* Main Body content */}
                     <div className="whitespace-pre-wrap font-sans text-body-lg text-on-background leading-relaxed space-y-6 pt-4">
                         {mainContent}
