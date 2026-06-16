@@ -42,17 +42,15 @@ Just output the title, nothing else."""
         return None
 
 def save_trends_to_new_db(trends):
-    # Parse the URL to get the file path
-    db_path = SQLALCHEMY_DATABASE_URL.replace("sqlite:///", "")
-    
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
+    from backend.database import SessionLocal
+    from backend.models import Newsletter
     
     # Initialize Groq client for title generation
     groq_client = None
     if GROQ_API_KEY:
         groq_client = Groq(api_key=GROQ_API_KEY)
     
+    session = SessionLocal()
     saved_count = 0
     for trend in trends:
         try:
@@ -88,17 +86,22 @@ def save_trends_to_new_db(trends):
             
             content = f"{trend.get('content', '')}\n\nEnriched Data:\n{trend.get('enriched_data', '')}"
             
-            cursor.execute('''
-                INSERT INTO newsletters (title, summary, content, sentiment, published_at)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (title, summary, content, sentiment, datetime.now()))
+            new_newsletter = Newsletter(
+                title=title,
+                summary=summary,
+                content=content,
+                sentiment=sentiment,
+                published_at=datetime.now()
+            )
+            session.add(new_newsletter)
             saved_count += 1
         except Exception as e:
             print(f"Error saving trend: {e}")
             
-    conn.commit()
-    conn.close()
+    session.commit()
+    session.close()
     return saved_count
+
 
 if __name__ == "__main__":
     print("Starting Integrated Pipeline...")
